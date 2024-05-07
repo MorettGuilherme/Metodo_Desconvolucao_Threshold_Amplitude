@@ -109,7 +109,7 @@ def grafico_dado_estatistico_janelamento(dado_estatistico, Matriz_Dados_Estatist
         vetor_dados = Matriz_Dados_Estatisticos_Janelamento[: , indice_coluna_media]
         
         # Comando para o nome do eixo das ordenadas.
-        plt.ylabel("Média do erro absoluto da amplitude (ADC Count)", fontsize = 18)
+        plt.ylabel("Média do erro de estimação da amplitude (ADC Count)", fontsize = 18)
         
     # Caso a variável dado_estatístico seja 2 (variância).
     elif dado_estatistico == 2:
@@ -118,7 +118,7 @@ def grafico_dado_estatistico_janelamento(dado_estatistico, Matriz_Dados_Estatist
         vetor_dados = Matriz_Dados_Estatisticos_Janelamento[: , indice_coluna_var]
         
         # Comando para o nome do eixo das ordenadas.
-        plt.ylabel("Variância do erro absoluto da amplitude (ADC Count)", fontsize = 18)
+        plt.ylabel("Var. do erro de estimação da amplitude (ADC Count)", fontsize = 18)
         
     # Caso a variável dado_estatistico seja 3 (desvio padrão).
     elif dado_estatistico == 3:
@@ -127,13 +127,13 @@ def grafico_dado_estatistico_janelamento(dado_estatistico, Matriz_Dados_Estatist
         vetor_dados = Matriz_Dados_Estatisticos_Janelamento[: , indice_coluna_DP]
         
         # Comando para o nome do eixo das ordenadas.
-        plt.ylabel("Desvio padrão do erro absoluto da amplitude (ADC Count)", fontsize = 18)
+        plt.ylabel("DP. do erro de estimação da amplitude (ADC Count)", fontsize = 18)
         
     # Comando que define o tamanho dos números do eixo das ordenadas.
     plt.yticks(fontsize = 16)
     
     # Comando para o plote do gráfico.
-    plt.plot(vetor_ocupacoes, vetor_dados, color='blue', linestyle='-', marker='o')
+    plt.plot(vetor_ocupacoes, vetor_dados, color='blue', linestyle='--', marker='o')
     
     # Comando para o grid.
     plt.grid()
