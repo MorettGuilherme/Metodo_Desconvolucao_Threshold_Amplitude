@@ -2,7 +2,7 @@ O método da desconvolução de sinais para o sistema linear invariante no tempo
 Nesse trabalho, o objetivo é determinar o janelamento mais adquado  apartir da análise média do erro de estimação da amplitude e o desvio padrão (noção da dispersão dos dados em realçaõ a média).
 O resultados foi que o janelamento 15 pode ser considerado como ideal.
 
-A seguir são listadas as pastas etambém os arquivos contidos nesse repositório, assim como suas respectivas funções:
+A seguir são listadas as pastas e também os arquivos contidos nesse repositório, assim como suas respectivas funções:
 
 1) Dados_Estatisticos_Desconvolucao_OC
 - Essa pasta contém os dados estatísticos (média, variância e desvio padrão) do erro de estimação ao decorrer das ocupações para cada um dos janelamentos. O formato dos arquivos é txt.
