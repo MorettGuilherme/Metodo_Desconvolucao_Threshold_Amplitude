@@ -56,7 +56,7 @@ A seguir são listadas as pastas e também os arquivos contidos nesse repositór
 IMPORTANTE: os dados das ocupações foram simulados computacionalmente.
 As características das distribuições são:
 - Distribuição amplitude: exponencial com média 100 ADC Count.
-- Fase: uniforme com números inteiros no intervalo de -5 a 5 ADC Count.
+- Distribuição Fase: uniforme com números inteiros no intervalo de -5 a 5 ADC Count.
 - Pedestal: 30 ADC Counts.
 - Nível de deformação: 0,01 ADC Count.
 - Número de eventos: 2000000.
