@@ -215,7 +215,7 @@ def grafico_B_k_fold(opcao, Matriz_dados_k_fold_OC_0, Matriz_dados_k_fold_OC_10,
     indice_coluna_DP = 3
     
     # Comando para o nome do eixo das abscissas.
-    plt.xlabel("Quantidade de janelamento", fontsize = 18)
+    plt.xlabel("Ocupação (OC.)", fontsize = 18)
     
     # COmando para o tamanho dos números do eixo das abscissas.
     plt.xticks(fontsize = 18)
