@@ -1,6 +1,6 @@
 # Projeto ATLAS - Reconstrução de sinal - Método da desconvolução de sinais.
 # Autor: Guilherme Barroso Morett.
-# Data: 06 de maio de 2024.
+# Data: 10 de maio de 2024.
 
 # Objetivo do código: construção do gráfico da validação cruzada K-Fold.
 
@@ -109,7 +109,7 @@ def grafico_A_k_fold(opcao, Matriz_dados_k_fold_OC_0, Matriz_dados_k_fold_OC_10,
     if opcao == 1:
         
         # Comando para o nome do eixo das ordenadas.
-        plt.ylabel("Média da média do erro de estimação (ADC Count)", fontsize = 18)
+        plt.ylabel("Média pelo K-Fold do erro de estimação (ADC Count)", fontsize = 18)
         
         # Comando para o tamanho dos números do eixo das ordenadas.
         plt.yticks(fontsize = 16)
@@ -118,7 +118,7 @@ def grafico_A_k_fold(opcao, Matriz_dados_k_fold_OC_0, Matriz_dados_k_fold_OC_10,
     elif opcao == 2:
         
         # Comando para o nome do eixo das ordenadas.
-        plt.ylabel("Média da var. do erro de estimação (ADC Count)", fontsize = 18)
+        plt.ylabel("Var. pelo K-Fold do erro de estimação (ADC Count)", fontsize = 18)
         
         # Comando para o tamanho dos números do eixo das ordenadas.
         plt.yticks(fontsize = 16)
@@ -127,7 +127,7 @@ def grafico_A_k_fold(opcao, Matriz_dados_k_fold_OC_0, Matriz_dados_k_fold_OC_10,
     elif opcao == 3:
         
         # Comando para o nome do eixo das ordenadas.
-        plt.ylabel("Média do DP. do erro de estimação (ADC Count)", fontsize = 18)
+        plt.ylabel("DP. pelo K-Fold do erro de estimação (ADC Count)", fontsize = 18)
         
         # Comando para o tamanho dos números do eixo das ordenadas.
         plt.yticks(fontsize = 16)
@@ -224,7 +224,7 @@ def grafico_B_k_fold(opcao, Matriz_dados_k_fold_OC_0, Matriz_dados_k_fold_OC_10,
     if opcao == 1:
         
         # Comando para o nome do eixo das ordenadas.
-        plt.ylabel("Média da média do erro de estimação (ADC Count)", fontsize = 18)
+        plt.ylabel("Média pelo K-Fold do erro de estimação (ADC Count)", fontsize = 18)
         
         # Comando para o tamanho dos números do eixo das ordenadas.
         plt.yticks(fontsize = 16)
@@ -233,7 +233,7 @@ def grafico_B_k_fold(opcao, Matriz_dados_k_fold_OC_0, Matriz_dados_k_fold_OC_10,
     elif opcao == 2:
         
         # Comando para o nome do eixo das ordenadas.
-        plt.ylabel("Média da var. do erro de estimação (ADC Count)", fontsize = 18)
+        plt.ylabel("Var. pelo K-Fold do erro de estimação (ADC Count)", fontsize = 18)
         
         # Comando para o tamanho dos números do eixo das ordenadas.
         plt.yticks(fontsize = 16)
@@ -242,7 +242,7 @@ def grafico_B_k_fold(opcao, Matriz_dados_k_fold_OC_0, Matriz_dados_k_fold_OC_10,
     elif opcao == 3:
         
         # Comando para o nome do eixo das ordenadas.
-        plt.ylabel("Média do DP. do erro de estimação (ADC Count)", fontsize = 18)
+        plt.ylabel("DP. pelo K-Fold do erro de estimação (ADC Count)", fontsize = 18)
         
         # Comando para o tamanho dos números do eixo das ordenadas.
         plt.yticks(fontsize = 16)
