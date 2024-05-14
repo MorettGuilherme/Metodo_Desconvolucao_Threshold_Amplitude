@@ -100,37 +100,35 @@ def grafico_A_k_fold(opcao, Matriz_dados_k_fold_OC_0, Matriz_dados_k_fold_OC_10,
     janelamento = Matriz_dados_k_fold_OC_0[:, indice_coluna_janelamento]
     
     # Nomeação do eixo das abscissas.
-    plt.xlabel("Quantidade de janelamento", fontsize = 18)
+    #plt.xlabel("Quantidade de janelamento", fontsize = 18)
+    plt.xlabel("Quantity of window", fontsize = 18)
     
     # COmando para o tamanho dos números do eixo das abscissas.
     plt.xticks(fontsize = 18)
+    
+    # Comando para o tamanho dos números do eixo das ordenadas.
+    plt.yticks(fontsize = 16)
     
     # Caso opcao seja 1:
     if opcao == 1:
         
         # Comando para o nome do eixo das ordenadas.
-        plt.ylabel("Média pelo K-Fold do erro de estimação (ADC Count)", fontsize = 18)
-        
-        # Comando para o tamanho dos números do eixo das ordenadas.
-        plt.yticks(fontsize = 16)
+        #plt.ylabel("Média pelo K-Fold do erro de estimação (ADC Count)", fontsize = 18)
+        plt.ylabel("Mean by K-Fold of Estimation Error (ADC Count)", fontsize = 18)
         
     # Caso opcao seja 2.
     elif opcao == 2:
         
         # Comando para o nome do eixo das ordenadas.
-        plt.ylabel("Var. pelo K-Fold do erro de estimação (ADC Count)", fontsize = 18)
-        
-        # Comando para o tamanho dos números do eixo das ordenadas.
-        plt.yticks(fontsize = 16)
+        #plt.ylabel("Var. pelo K-Fold do erro de estimação (ADC Count)", fontsize = 18)
+        plt.ylabel("Var. by K-Fold of Estimation Error (ADC Count)", fontsize = 18)
         
     # Caso opcao seja 3.
     elif opcao == 3:
         
         # Comando para o nome do eixo das ordenadas.
-        plt.ylabel("DP. pelo K-Fold do erro de estimação (ADC Count)", fontsize = 18)
-        
-        # Comando para o tamanho dos números do eixo das ordenadas.
-        plt.yticks(fontsize = 16)
+        #plt.ylabel("DP. pelo K-Fold do erro de estimação (ADC Count)", fontsize = 18)
+        plt.ylabel("SD. by K-Fold of Estimation Error (ADC Count)", fontsize = 18)
         
     # Armazenamento dos dados referentes a ocupação 0.
     Matriz_dados_medias_k_fold_OC_0 = Matriz_dados_k_fold_OC_0[: , indice_coluna_medias]
@@ -215,10 +213,14 @@ def grafico_B_k_fold(opcao, Matriz_dados_k_fold_OC_0, Matriz_dados_k_fold_OC_10,
     indice_coluna_DP = 3
     
     # Comando para o nome do eixo das abscissas.
-    plt.xlabel("Ocupação (OC.)", fontsize = 18)
+    #plt.xlabel("Ocupação (OC.)", fontsize = 18)
+    plt.xlabel("Occupancy", fontsize = 18)
     
     # COmando para o tamanho dos números do eixo das abscissas.
     plt.xticks(fontsize = 18)
+    
+    # Comando para o tamanho dos números do eixo das ordenadas.
+    plt.yticks(fontsize = 16)
     
     # Caso opcao seja 1:
     if opcao == 1:
@@ -226,26 +228,18 @@ def grafico_B_k_fold(opcao, Matriz_dados_k_fold_OC_0, Matriz_dados_k_fold_OC_10,
         # Comando para o nome do eixo das ordenadas.
         plt.ylabel("Média pelo K-Fold do erro de estimação (ADC Count)", fontsize = 18)
         
-        # Comando para o tamanho dos números do eixo das ordenadas.
-        plt.yticks(fontsize = 16)
-        
     # Caso opcao seja 2.
     elif opcao == 2:
         
         # Comando para o nome do eixo das ordenadas.
         plt.ylabel("Var. pelo K-Fold do erro de estimação (ADC Count)", fontsize = 18)
         
-        # Comando para o tamanho dos números do eixo das ordenadas.
-        plt.yticks(fontsize = 16)
-        
     # Caso opcao seja 3.
     elif opcao == 3:
         
         # Comando para o nome do eixo das ordenadas.
-        plt.ylabel("DP. pelo K-Fold do erro de estimação (ADC Count)", fontsize = 18)
-        
-        # Comando para o tamanho dos números do eixo das ordenadas.
-        plt.yticks(fontsize = 16)
+        #plt.ylabel("DP. pelo K-Fold do erro de estimação (ADC Count)", fontsize = 18)
+        plt.ylabel("SD. by K-Fold of Estimation Error (ADC Count)", fontsize = 18)
     
     # Definição dos índices para cada um dos janelamentos de acordo com a organização do arquivo de entrada.    
     indice_J7 = 0
