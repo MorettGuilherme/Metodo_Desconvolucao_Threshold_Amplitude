@@ -78,21 +78,19 @@ def histograma_erro_amplitude(lista_erro_amplitude, media_erro_amplitude, var_er
     vetor_erro_amplitude = np.array(lista_erro_amplitude)
 
     # Nomeação do eixo x de acordo com os demais parâmetros.
-    #plt.xlabel('Erro de estimação da amplitude (ADC Count)', fontsize = 18)
-    plt.xlabel('Amplitude Estimation Error (ADC Count)', fontsize = 18)
+    plt.xlabel('Erro de estimação da amplitude (ADC Count)', fontsize = 18)
 
     # Definição do tamanho dos números do eixo x.    
     plt.xticks(fontsize = 16)
 
     # Nomeação do eixo y.
-    #plt.ylabel('Número de eventos', fontsize = 18)
-    plt.ylabel('number of events', fontsize = 18)
+    plt.ylabel('Número de eventos', fontsize = 18)
     
     # Definição do tamanho dos números do eixo y.
     plt.yticks(fontsize = 16)
 
     # A variável texto recebe uma string com as informações de interesse.
-    texto = f"Mean: {round(media_erro_amplitude, 6)} \n Variance: {round(var_erro_amplitude, 6)} \n Standard deviation: {round(desvio_padrao_erro_amplitude, 6)}"
+    texto = f"Média: {round(media_erro_amplitude, 6)} \n Variância: {round(var_erro_amplitude, 6)} \n Desvio padrão: {round(desvio_padrao_erro_amplitude, 6)}"
 
     # Definição do histograma a partir do vetor vetor_erro_amplitude.
     plt.hist(vetor_erro_amplitude, bins = 100, range = [-200, 200], edgecolor = 'black', linewidth=1.2)
