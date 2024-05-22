@@ -72,26 +72,29 @@ def dados_estatisticos_erro_amplitude(lista_erro_amplitude):
 ### ------------------------------ 2) INSTRUÇÃO PARA A CONSTRUÇÃO DO HISTOGRAMA DO ERRO DE ESTIMAÇÃO DA AMPLITUDE ------------------------------ ###
 
 # Definição da função para a confecção do histograma do erro de estimação da amplitude.
-def histograma_erro_amplitude(lista_erro_amplitude, media_erro_amplitude, var_erro_amplitude, desvio_padrao_erro_amplitude):
+def histograma_erro_amplitude(n_ocupacao, lista_erro_amplitude, media_erro_amplitude, var_erro_amplitude, desvio_padrao_erro_amplitude):
     
     # A lista do erro da amplitude é convertida para o tipo numpy array.
     vetor_erro_amplitude = np.array(lista_erro_amplitude)
 
     # Nomeação do eixo x de acordo com os demais parâmetros.
-    plt.xlabel('Erro de estimação da amplitude (ADC Count)', fontsize = 18)
+    #plt.xlabel('Erro de estimação da amplitude (ADC Count)', fontsize = 18)
+    plt.xlabel('Amplitude estimation error (ADC Count)', fontsize = 18)
 
     # Definição do tamanho dos números do eixo x.    
     plt.xticks(fontsize = 16)
 
     # Nomeação do eixo y.
-    plt.ylabel('Número de eventos', fontsize = 18)
+    #plt.ylabel('Número de eventos', fontsize = 18)
+    plt.ylabel('Number of events', fontsize = 18)
     
     # Definição do tamanho dos números do eixo y.
     plt.yticks(fontsize = 16)
 
     # A variável texto recebe uma string com as informações de interesse.
-    texto = f"Média: {round(media_erro_amplitude, 6)} \n Variância: {round(var_erro_amplitude, 6)} \n Desvio padrão: {round(desvio_padrao_erro_amplitude, 6)}"
-
+    #texto = f"Média: {round(media_erro_amplitude, 6)} \n Variância: {round(var_erro_amplitude, 6)} \n Desvio padrão: {round(desvio_padrao_erro_amplitude, 6)}"
+    texto = f"Mean: {round(media_erro_amplitude, 6)} \n Variance: {round(var_erro_amplitude, 6)} \n Standard Deviation: {round(desvio_padrao_erro_amplitude, 6)}"
+    
     # Definição do histograma a partir do vetor vetor_erro_amplitude.
     plt.hist(vetor_erro_amplitude, bins = 100, range = [-200, 200], edgecolor = 'black', linewidth=1.2)
     
@@ -101,6 +104,8 @@ def histograma_erro_amplitude(lista_erro_amplitude, media_erro_amplitude, var_er
     transform=plt.gca().transAxes,
     bbox=dict(facecolor='white', alpha=0.5),
     fontsize = 14)
+    
+    plt.title(f"Occupancy (OC.) = {n_ocupacao}", fontsize=18)
 
     # Criação de grid.
     plt.grid()
@@ -162,7 +167,7 @@ def principal_histograma_erro_amplitude_desconvolucao():
     
     media_erro_amplitude, var_erro_amplitude, desvio_padrao_erro_amplitude = dados_estatisticos_erro_amplitude(lista_erro_amplitude)
     
-    histograma_erro_amplitude(lista_erro_amplitude, media_erro_amplitude, var_erro_amplitude, desvio_padrao_erro_amplitude)
+    histograma_erro_amplitude(n_ocupacao, lista_erro_amplitude, media_erro_amplitude, var_erro_amplitude, desvio_padrao_erro_amplitude)
     
 # Chamada da função main.
 principal_histograma_erro_amplitude_desconvolucao()
