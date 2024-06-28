@@ -1,15 +1,15 @@
-# EXPERIMENTO ATLAS - Reconstrução de sinal - Método de desconvolução de sinais - Estimação da amplitude.
+# EXPERIMENTO ATLAS - Reconstrução de sinal - Método de Desconvolução de Sinal - Estimação da amplitude.
 # Autor: Guilherme Barroso Morett.
-# Data: 25 de junho de 2024.
+# Data: 28 de junho de 2024.
 
-# Objetivo do código: análise do erro absoluto do parâmetro da amplitude pelo método de desconvolução de sinais - P = N.
+# Objetivo do código: análise do erro absoluto do parâmetro da amplitude pelo método de Desconvolução de Sinal - P = N.
 
 """
 Organização do Código:
 
 Importação de arquivos.
 Leitura dos dados de ocupação: leitura_dados_ocupacao_desconvolucao.py
-Método da desconvolução: metodo_desconvolucao.py
+Método de Desconvolução: metodo_desconvolucao.py
 
 Funções presentes:
 
@@ -42,7 +42,7 @@ print("\n-----------------------------------------------------------------------
 # Título do programa.
 
 # A variável titulo_programa armazena o título em negrito.
-titulo_programa = colored("Análise do erro de estimação da amplitude pelo método de desconvolução de sinais - P = N:\n", attrs=["bold"])
+titulo_programa = colored("Análise do erro de estimação da amplitude pelo método de Desconvolução de Sinal - P = N:\n", attrs=["bold"])
 
 # Impressão do título do programa.
 print(titulo_programa)
@@ -166,7 +166,7 @@ def principal_histograma_erro_amplitude_desconvolucao():
     
     histograma_erro_amplitude(n_ocupacao, lista_erro_amplitude, media_erro_amplitude, var_erro_amplitude, desvio_padrao_erro_amplitude)
     
-# Chamada da função main.
+# Chamada da função principal do código.
 principal_histograma_erro_amplitude_desconvolucao()
 
 ### -------------------------------------------------------------------------------------------------------------------------------------------- ###

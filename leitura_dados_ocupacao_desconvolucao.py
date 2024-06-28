@@ -1,6 +1,6 @@
 # EXPERIMENTO ATLAS - Reconstrução de sinal - Método de Desconvolução de Sinal - Estimação da amplitude.
 # Autor: Guilherme Barroso Morett.
-# Data: 27 de maio de 2024.
+# Data: 28 de maio de 2024.
 
 # Objetivo do código: realização da leitura dos dados de ocupação no formato free running.
 
@@ -111,7 +111,7 @@ def amostras_pulsos_e_referencia(Matriz_Dados_OC):
     # A variável indice_amplitude_referencia armazena o índice da coluna que contém as amplitudes de referência.
     indice_amplitude_referencia = 2
     
-    # A variável indice_fase_referencia armazena o índice da conluna que contém as fases de referência.
+    # A variável indice_fase_referencia armazena o índice da coluna que contém as fases de referência.
     indice_fase_referencia = 3
 
     # Definição do vetor das amostras de pulsos de sinais.
@@ -176,8 +176,6 @@ def amostras_janelamento(amostras, parametro_referencia, n_janelamento):
 ### -------------------------------------------------------------------------------------------------------------------------------------------- ###
 
 ### ---------------------------------- 4) FUNÇÃO PARA SEPARAÇÃO EM DADOS DE TREINO E DE TESTE -------------------------------------------------- ###
-
-# Definição da função para a separação dos dados em treino e teste.
 
 # Definição da função para a separação dos dados em treino e teste.
 def dados_treino_teste(Matriz_Dados_Pulsos, vetor_parametro_referencia):

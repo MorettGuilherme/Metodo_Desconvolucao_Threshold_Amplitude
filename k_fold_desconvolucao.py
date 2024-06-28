@@ -1,6 +1,6 @@
 # EXPERIMENTO ATLAS - Reconstrução de sinal - Método de Desconvolução de Sinal - Estimação da amplitude.
 # Autor: Guilherme Barroso Morett.
-# Data: 27 de junho de 2024.
+# Data: 28 de junho de 2024.
 
 # Objetivo do código: implementação da validação cruzada para o método de Desconvolução de Sinal.
 
@@ -20,7 +20,6 @@ Saída: nada.
 2) Instrução da validação cruzada K-Fold.
 Entrada: matriz com os pulsos de sinais e o vetor das amplitudes de referência.
 Saída: nada.
-Obs.: no método da Desconvolução, não há separação dos dados em treino e teste. Logo os dados estatísticos advém de cada um dos blocos.
 
 3) Instrução principal do código.
 Entrada: nada.
@@ -119,7 +118,7 @@ def K_fold(Matriz_Pulsos_Sinais, vetor_parametro_referencia, n_ocupacao, n_janel
     # Definição da lista vazia lista_bloco_DP_erro.
     lista_blocos_DP_erro = []
      
-    # Para indice_bloco de 0 até o tamanho da matriz de dados de entrada com incremento igual a quantidade de elementos no bloco.
+    # Para indice_bloco zero até o tamanho da matriz de dados de entrada com incremento igual a quantidade de elementos no bloco.
     for indice_bloco in range(0, len(Matriz_Pulsos_Sinais), elementos_bloco):
         
         # Definição do bloco que contém a matriz dos pulsos de sinais.
@@ -190,7 +189,7 @@ def principal_K_fold():
     # A variável incremento_janelamento armazena o valor do incremento entre os janelamentos.
     incremento_janelamento = 2
     
-    # Para o número de ocupações de 0 até 10 com incremento de 1. 
+    # Para o número de ocupações de 0 até 100 com incremento de 10. 
     for numero_ocupacao in tqdm(range(ocupacao_inicial, ocupacao_final+1, incremento_ocupacao)):
     
         # Para o número de janelamento de 7 até 19 com incremento de 2.
@@ -208,7 +207,7 @@ def principal_K_fold():
     
             K_fold(Matriz_Dados_Pulsos, vetor_parametro_referencia, numero_ocupacao, n_janelamento)
      
-# Chamada da função K_fold_OC.
+# Chamada da função principal do código.
 principal_K_fold()
        
 ### -------------------------------------------------------------------------------------------------------------------------------------------- ###

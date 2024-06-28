@@ -1,6 +1,6 @@
 # EXPERIMENTO ATLAS - Reconstrução de sinal - Método de Desconvolução de Sinal - Estimação da amplitude.
 # Autor: Guilherme Barroso Morett.
-# Data: 27 de junho de 2024.
+# Data: 28 de junho de 2024.
 
 # Objetivo do código: cálculo do desempenho do método de Desconvolução de Sinal para a estimação da amplitude pela validação cruzada K-Fold.
 
@@ -9,7 +9,7 @@ Organização do código:
 
 Importação de arquivos.
 Leitura dos dados de ocupação: leitura_dados_ocupacao_desconvolucao.py
-Método da Desconvolução: metodo_desconvolucao_P_igual_N.py
+Método de Desconvolução: metodo_desconvolucao_P_igual_N.py
 
 Funções presentes:
 
@@ -17,7 +17,7 @@ Funções presentes:
 Entrada: número de ocupação, média do desempenho, variância do desempenho, desvio padrão do desempenho.
 Saída: nada.
 
-2) Função para o cálculo do desempenho do Desconvolução de Sinal pelo Erro Médio de Estimação (EME).
+2) Função para o cálculo do desempenho do método de Desconvolução de Sinal pelo Erro Médio de Estimação (EME).
 Entrada: número de elementos presentes em cada bloco e lista dos erros de estimação para cada bloco do K-Fold.
 Saída: média do EME, variância do EME e desvio padrão do EME.
 
@@ -33,11 +33,15 @@ Saída: média do MAE, variância do MAE e desvio padrão do MAE.
 Entrada: lista dos parâmetros de referência e lista dos erros de estimação para cada bloco do K-Fold.
 Saída: média do SNR, variância do SNR e desvio padrão do SNR.
 
-6) Instrução da validação cruzada K-Fold adaptada para o cálculo do desempenho do método de desconvolução de sinal.
+6) Função para o cálculo do desempenho do método de Desconvolução de Sinal pelo desvio padrão (DP).
+Entrada: número de elementos presentes em cada bloco e lista dos erros de estimação para cada bloco do K-Fold.
+Saída: valor do desvio padrão de cada bloco.
+
+7) Instrução da validação cruzada K-Fold adaptada para o cálculo do desempenho do método de Desconvolução de Sinal.
 Entrada: matriz com os pulsos de sinais e o vetor da amplitude.
 Saída: nada.
 
-7) Instrução principal do código.
+8) Instrução principal do código.
 Entrada: nada.
 Saída: nada.
 """
@@ -81,7 +85,7 @@ def arquivo_saida_dados_desempenho_desconvolucao(parametro, n_ocupacao, n_janela
         # Criação da pasta de saída.
         os.makedirs(pasta_saida)
 
-    # Nome do arquivo de saida.
+    # Nome do arquivo de saída.
     arquivo_saida = f"k_fold_{parametro}_{mecanismo_desempenho}_desempenho_desconvolucao_J_{n_janelamento_ideal}.txt"
 
     # Caminho completo para o arquivo de saída.
@@ -158,7 +162,7 @@ def MAE(numero_elementos_bloco, bloco_erro_estimacao):
 
 ### -------------------------------------------------------------------------------------------------------------------------------------------- ###
 
-### --------------------------- 6) FUNÇÃO PARA O CÁLCULO DA RELAÇÃO SINAL-RUÍDO (SIGNAL-TO-NOISE RATIO - SNR) ---------------------------------- ###
+### --------------------------- 5) FUNÇÃO PARA O CÁLCULO DA RELAÇÃO SINAL-RUÍDO (SIGNAL-TO-NOISE RATIO - SNR) ---------------------------------- ###
 
 # Definição da função para o cálculo da relação sinal-ruído (Signal-to-Noise Ratio - SNR).
 def SNR(bloco_parametro_referencia, bloco_erro_estimacao):
@@ -177,9 +181,25 @@ def SNR(bloco_parametro_referencia, bloco_erro_estimacao):
 
 ## --------------------------------------------------------------------------------------------------------------------------------------------- ###
 
+### --------------------------- 6) FUNÇÃO PARA O CÁLCULO DO DESVIO PADRÃO (DP) ----------------------------------------------------------------- ###
+
+# Definição da função para o cálculo do desvio padrão.
+def DP(numero_elementos_bloco, bloco_erro_estimacao):
+    
+    # Eleva todos os elementos do bloco_erro_estimacao ao quadrado e salva o resultado na lista bloco_erro_estimacao_quadratico.
+    bloco_erro_estimacao_quadratico = [elemento**2 for elemento in bloco_erro_estimacao]
+
+    # Cálculo do desvio padrão.
+    valor_DP = np.sqrt((np.sum(bloco_erro_estimacao_quadratico))/(numero_elementos_bloco))
+    
+    # A função retorna o valor valor_DP.
+    return valor_DP
+
+## --------------------------------------------------------------------------------------------------------------------------------------------- ###
+
 ### ----------- 7) INSTRUÇÃO PARA A VALIDAÇÃO CRUZADA K-FOLD ADAPTADA PARA O CÁLCULO DO DESEMPENHO DO MÉTODO DE DESCONVOLUÇÃO DE SINAL -------- ###
 
-# Definição da instrução da técnica de validação cruzada K-Fold para o cálculo do desempenho do método de Desconvolução de sinaL.
+# Definição da instrução da técnica de validação cruzada K-Fold para o cálculo do desempenho do método de Desconvolução de Sinal.
 def K_fold_desempenho_desconvolucao(n_ocupacao, n_janelamento_ideal, opcao_avaliacao_desempenho, Matriz_Pulsos_Sinais, vetor_amplitude_referencia):
     
     # Criação da variável parâmetro que armazena a string "amplitude".
@@ -207,7 +227,13 @@ def K_fold_desempenho_desconvolucao(n_ocupacao, n_janelamento_ideal, opcao_avali
     elif opcao_avaliacao_desempenho == 4:
            
         # A variável mecanismo_desempenho recebe a string "SNR".
-        mecanismo_desempenho = "SNR"   
+        mecanismo_desempenho = "SNR" 
+        
+    # Caso a variável opcao_avaliacao_desempenho seja igual a 5.
+    elif opcao_avaliacao_desempenho == 5:
+           
+        # A variável mecanismo_desempenho recebe a string "DP".
+        mecanismo_desempenho = "DP"   
     
     # Criação da lista vazia blocos_pulsos_sinais.
     blocos_pulsos_sinais = []
@@ -237,7 +263,7 @@ def K_fold_desempenho_desconvolucao(n_ocupacao, n_janelamento_ideal, opcao_avali
     # Definição da lista vazia lista_blocos_valores_desempenho.
     lista_blocos_valores_desempenho = []
      
-    # Para indice_bloco de 0 até o tamanho da matriz de dados de entrada com incremento igual a quantidade de elementos no bloco.
+    # Para indice_bloco de zero até o tamanho da matriz de dados de entrada com incremento igual a quantidade de elementos no bloco.
     for indice_teste in range(0, len(blocos_pulsos_sinais)):
         
         # Definição do bloco_teste_pulsos_sinais como sendo aquele de índice igual ao indice_teste.
@@ -292,6 +318,15 @@ def K_fold_desempenho_desconvolucao(n_ocupacao, n_janelamento_ideal, opcao_avali
            bloco_valor_SNR = SNR(bloco_teste_amplitude_referencia, bloco_lista_erro_amplitude)
            # O valor de bloco_valor_SNR é acrescentado a lista lista_blocos_valores_desempenho.
            lista_blocos_valores_desempenho.append(bloco_valor_SNR)
+           
+        # Caso a variável opcao_avaliacao_desempenho seja igual a 5.
+        elif opcao_avaliacao_desempenho == 5:
+            
+           # A variável bloco_valor_DP recebe o valor de retorno da função DP.
+           bloco_valor_DP = DP(quantidade_elementos_bloco, bloco_lista_erro_amplitude)
+           # O valor de bloco_valor_DP é acrescentado a lista lista_blocos_valores_desempenho.
+           lista_blocos_valores_desempenho.append(bloco_valor_DP)
+            
 
     # Cálculo dos dados estatísticos do desempenho.
     media_desempenho = np.mean(lista_blocos_valores_desempenho)
@@ -309,12 +344,12 @@ def K_fold_desempenho_desconvolucao(n_ocupacao, n_janelamento_ideal, opcao_avali
 def principal_desempenho_desconvolucao():
     
     # Impressão de mensagem solicitando ao usuário digitar a opção desejada para a análise do desempenho.
-    print("Opções de avalições de desempenho do método:\nErro Médio Estimação (EME) - 1\nErro Médio Quadrático (Mean Squared Error - MSE) - 2\nErro Médio Absoluto (Mean Absolute Erro - MAE) - 3\nRelação Sinal-Ruído (Signal-to-Noise Ratio - SNR) - 4")
+    print("Opções de avalições de desempenho do método:\nErro Médio Estimação (EME) - 1\nErro Médio Quadrático (Mean Squared Error - MSE) - 2\nErro Médio Absoluto (Mean Absolute Erro - MAE) - 3\nRelação Sinal-Ruído (Signal-to-Noise Ratio - SNR) - 4\nDesvio Padrão (DP) - 5")
     # A variável opcao_avaliacao_desempenho armazena o valor digitado pelo usuário no terminal.
     opcao_avaliacao_desempenho = int(input("Digite o número da opção desejada: "))
     
-    # A variável lista_opcoes_avaliacoes_desempenho armazena o valores disponíveis para a análise do desempenho.
-    lista_opcoes_avaliacoes_desempenho = list(range(1, 4, 1))
+    # A variável lista_opcoes_avaliacoes_desempenho armazena os valores disponíveis para a análise do desempenho.
+    lista_opcoes_avaliacoes_desempenho = list(range(1, 6, 1))
     
     # Caso o valor digitado pelo usuário não estiver na lista.
     if opcao_avaliacao_desempenho not in lista_opcoes_avaliacoes_desempenho:

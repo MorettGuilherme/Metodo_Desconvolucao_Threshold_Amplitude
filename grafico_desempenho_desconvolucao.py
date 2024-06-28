@@ -1,8 +1,8 @@
 # EXPERIMENTO ATLAS - Reconstrução de sinal - Método de Desconvolução de Sinal - Estimação da amplitude.
 # Autor: Guilherme Barroso Morett.
-# Data: 27 de junho de 2024.
+# Data: 28 de junho de 2024.
 
-# Objetivo do código: gráfico do desempenho (EME, MSE, MAE ou SNR) ao longo das ocupações de acordo com o janelamento ideal para o método de Desconvolução de Sinal para a estimação da amplitude.
+# Objetivo do código: gráfico do desempenho (EME, MSE, MAE, SNR E DP) ao longo das ocupações de acordo com o janelamento ideal para o método de Desconvolução de Sinal para a estimação da amplitude.
 
 """ 
 Organização do Código:
@@ -16,7 +16,7 @@ Entrada: parâmetro estimado, número do janelamento ideal, opção de avaliaç�
 Saída: matriz com os dados de entrada organizados de acordo com a coluna (número da ocupação, média, variância e desvio padrão do desempenho do método de Desconvolução de Sinal).
 
 2) Instrução para o plote do gráfico do desempenho do método de Desconvolução de Sinal ao longo das ocupações para o janelamento ideal.
-Entrada: matriz dos dados de desempenho do método de Sesconvolução de Sinal.
+Entrada: matriz dos dados de desempenho do método de Desconvolução de Sinal.
 Saída: nada.
 
 3) Instrução principal do código.
@@ -36,7 +36,7 @@ print("\n-----------------------------------------------------------------------
 # Título do programa.
 
 # A variável titulo_programa armazena o título em negrito.
-titulo_programa = colored("Plote do gráfico do desempenho (MSE, MAE ou SNR) ao longo das ocupações de acordo com o janelamento ideal para o método de Desconvolução de Sinal:\n", attrs=["bold"])
+titulo_programa = colored("Plote do gráfico do desempenho (EME, MSE, MAE, SNR ou DP) ao longo das ocupações de acordo com o janelamento ideal para o método de Desconvolução de Sinal:\n", attrs=["bold"])
 
 # Impressão do título do programa.
 print(titulo_programa)
@@ -126,11 +126,17 @@ def grafico_dado_estatistico_desempenho_desconvolucao(opcao_avaliacao_desempenho
         # Comando para o nome do eixo das ordenadas de acordo com o erro médio absoluto.
         plt.ylabel(r"Média do erro médio absoluto (ADC Count)", fontsize = 18)
         
-    # Caso a variável dado_estatistico seja 4 (desvio padrão).
+    # Caso a variável opcao_avalicao_desempenho seja 4.
     elif opcao_avaliacao_desempenho == 4:
         
         # Comando para o nome do eixo das ordenadas de acordo com a relação Sinal-Ruído (Signal-to-Noise Ratio - SNR).
         plt.ylabel(r"Média da relação Sinal-Ruído", fontsize = 18)
+        
+    # Caso a variável opcao_avalicao_desempenho seja 5.
+    elif opcao_avaliacao_desempenho == 5:
+        
+        # Comando para o nome do eixo das ordenadas de acordo com a média do desvio padrão.
+        plt.ylabel(r"Média do desvio padrão (ADC Count)", fontsize = 18)
         
     # Comando que define o tamanho dos números do eixo das ordenadas.
     plt.yticks(fontsize = 16)
@@ -152,13 +158,13 @@ def grafico_dado_estatistico_desempenho_desconvolucao(opcao_avaliacao_desempenho
 def principal_grafico_dado_estatistico_desempenho_desconvolucao():
     
     # Impressão de mensagem no terminal.
-    print("Opções de avalições de desempenho do método:\nErro Médio Estimação (EME) - 1\nErro Médio Quadrático (Mean Squared Error - MSE) - 2\nErro Médio Absoluto (Mean Absolute Erro - MAE) - 3\nRelação Sinal-Ruído (Signal-to-Noise Ratio - SNR) - 4")
+    print("Opções de avalições de desempenho do método:\nErro Médio Estimação (EME) - 1\nErro Médio Quadrático (Mean Squared Error - MSE) - 2\nErro Médio Absoluto (Mean Absolute Erro - MAE) - 3\nRelação Sinal-Ruído (Signal-to-Noise Ratio - SNR) - 4\nDesvio Padrão (DP) - 5")
 
     # A variável opcao_avalicao_desempenho armazena o número do tipo inteiro digitado pelo usuário via terminal.
     opcao_avaliacao_desempenho = int(input("Digite o número da opção desejada: "))
 
     # A variável valores_dados é uma lista com os valores aceitáveis para opcao_avaliacao_desempenho.
-    valores_avaliacoes_desempenho = list(range(1,5,1))
+    valores_avaliacoes_desempenho = list(range(1,6,1))
     
     # Caso a variável opcao_avaliacao_desempenho seja igual a 1.
     if opcao_avaliacao_desempenho == 1:
@@ -183,6 +189,12 @@ def principal_grafico_dado_estatistico_desempenho_desconvolucao():
            
         # A variável mecanismo_desempenho recebe a string "SNR".
         mecanismo_desempenho = "SNR"  
+        
+    # Caso a variável opcao_avaliacao_desempenho seja igual a 5.
+    elif opcao_avaliacao_desempenho == 5:
+           
+        # A variável mecanismo_desempenho recebe a string "DP".
+        mecanismo_desempenho = "DP"
 
     # Caso o valor digitado armazenado na variável opcao_avaliacao_desempenho não estiver presente na lista valores_avaliacoes_desempenho.
     if opcao_avaliacao_desempenho not in valores_avaliacoes_desempenho:

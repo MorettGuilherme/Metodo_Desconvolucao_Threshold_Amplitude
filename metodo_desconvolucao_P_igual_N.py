@@ -1,6 +1,6 @@
 # EXPERIMENTO ATLAS - Reconstrução de sinal - Método de Desconvolução de Sinal - Estimação da amplitude.
 # Autor: Guilherme Barroso Morett.
-# Data: 27 de junho de 2024.
+# Data: 28 de junho de 2024.
 
 # Objetivo do código: aplicação do método de Desconvolução de Sinal - P = N.
 
@@ -286,9 +286,9 @@ def matriz_H(n_janelamento):
 
 ### -------------------------------------------------------------------------------------------------------------------------------------------- ###
 
-### ---------------------------------------- 2) FUNÇÃO DO MÉTODO DE DESCONVOLUÇÃO -------------------------------------------------------------- ###
+### ---------------------------------------- 2) FUNÇÃO DO MÉTODO DE DESCONVOLUÇÃO DE SINAL ----------------------------------------------------- ###
 
-# Definição da função para o método de Desconvolução de Sinais.
+# Definição da função para o método de Desconvolução de Sinal.
 def metodo_desconvolucao_P_igual_N(Matriz_Pulsos_Sinais, vetor_amplitude_referencia, n_janelamento):  
     
     # Criação da lista vazia para armazenar os erros calculados para a amplitude. 

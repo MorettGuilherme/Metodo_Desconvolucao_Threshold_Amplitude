@@ -1,6 +1,6 @@
-# EXPERIMENTO ATLAS - Reconstrução de sinal - Método de desconvolução de sinais - Estimação da amplitude.
+# EXPERIMENTO ATLAS - Reconstrução de sinal - Método de Desconvolução de Sinal - Estimação da amplitude.
 # Autor: Guilherme Barroso Morett.
-# Data: 25 de junho de 2024.
+# Data: 27 de junho de 2024.
 
 # Objetivo do código: construção do gráfico da validação cruzada K-Fold.
 
@@ -40,7 +40,7 @@ print("\n-----------------------------------------------------------------------
 # Título do programa.
 
 # A variável titulo_programa armazena o título em negrito.
-titulo_programa = colored("Plote do gráfico da validação cruzada K-Fold para o método de desconvolução de sinais - P = N:\n", attrs=["bold"])
+titulo_programa = colored("Plote do gráfico da validação cruzada K-Fold para o método de Desconvolução de Sinal - P = N:\n", attrs=["bold"])
 
 # Impressão do título do programa.
 print(titulo_programa)
