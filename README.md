@@ -11,7 +11,7 @@ A seguir estão listadas as pastas e também os arquivos contidos nesse reposit�
 - Essa pasta contém os dados organizados em colunas; respectivamente tempo (ns), pulsos de sinais (ADC Count), amplitude de referência (ADC Count) e fase de referência (ns) para cada uma das ocupações. O formato dos arquivo é txt.
 
 3) K_Fold_amplitude_DP_Desempenho_Desconvolucao_OC
-Essa pasta contém os dados organizados em colunas; respectivamente tempo (ns), pulsos de sinais (ADC Count), amplitude de referência (ADC Count) e fase de referência (ns) para cada uma das ocupações. O formato dos arquivo é txt.
+- Essa pasta contém os dados organizados em colunas; respectivamente tempo (ns), pulsos de sinais (ADC Count), amplitude de referência (ADC Count) e fase de referência (ns) para cada uma das ocupações. O formato dos arquivo é txt.
 
 3) K_Fold_amplitude_EME_Desempenho_Desconvolucao_OC
 - Essa pasta contém os dados organizado em colunas; respectivamente número de ocupação, média do EME, variância do EME, desvio padrão do EME. O formato do arquivo é txt.
