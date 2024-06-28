@@ -1,10 +1,11 @@
-# Projeto ATLAS - Reconstrução de sinal - Método da desconvolução de sinais.
+# EXPERIMENTO ATLAS - Reconstrução de sinal - Método de Desconvolução de Sinal - Estimação da amplitude.
 # Autor: Guilherme Barroso Morett.
-# Data: 06 de maio de 2024.
+# Data: 27 de maio de 2024.
 
 # Objetivo do código: realização da leitura dos dados de ocupação no formato free running.
 
-""" Organização do código:
+""" 
+Organização do código:
 
 Leitura dos dados de entrada de acordo com o janelamento desejado.
 Os dados de entrada das ocupações no formato de arquivo texto (txt) contém informações sobre os pulsos de sinais (ADC Count), a amplitude de referência (ADC Count) e a fase de referência (ns).
@@ -80,22 +81,22 @@ def retirada_pedestal(Matriz_Dados_OC):
     linhas_Matriz_Dados_OC = len(Matriz_Dados_OC)
 
     # Construção de uma matriz em que a coluna unitária corresponde ao pulsos de sinais do arquivo de entrada.
-    Matriz_pedestal = [[0, 1, 0, 0] for i in range(linhas_Matriz_Dados_OC)]
+    Matriz_Pedestal = [[0, 1, 0, 0] for i in range(linhas_Matriz_Dados_OC)]
 
     # Conversão dessa matriz para o tipo numpy array.
-    Matriz_pedestal = np.array(Matriz_pedestal)
+    Matriz_Pedestal = np.array(Matriz_Pedestal)
 
     # Definição do valor do pedestal.
     valor_pedestal = 30
 
     # Pedestal é uma matriz em que a coluna não nula correponde aos pulsos de sinais do arquivo de entrada.
-    Pedestal = valor_pedestal*Matriz_pedestal
+    Pedestal = valor_pedestal*Matriz_Pedestal
 
     # Subtração dos pulsos de sinais o valor do pedestal e armazenamento na matriz Matriz_Dados_OC_sem_pedestal.
-    Matriz_Dados_OC_sem_pedestal =  Matriz_Dados_OC-Pedestal
+    Matriz_Dados_OC_Sem_Pedestal =  Matriz_Dados_OC-Pedestal
     
     # A função retorna a Matriz_Dados_OC sem o valor do pedestal.
-    return Matriz_Dados_OC_sem_pedestal
+    return Matriz_Dados_OC_Sem_Pedestal
 
 ### -------------------------------------------------------------------------------------------------------------------------------------------- ###
 
@@ -146,7 +147,7 @@ def amostras_janelamento(amostras, parametro_referencia, n_janelamento):
         j += 1
 
     # Conversão da lista Matriz_dados_pulsos para um array (matriz).   
-    Matriz_dados_pulsos = np.array(Matriz_dados_pulsos)
+    Matriz_Dados_Pulsos = np.array(Matriz_dados_pulsos)
 
     # Definição do índice i.
     i = (n_janelamento-1)//2
@@ -169,8 +170,8 @@ def amostras_janelamento(amostras, parametro_referencia, n_janelamento):
     # Conversão da lista vetor_parametro_referencia para um array (vetor).
     vetor_parametro_referencia = np.array(vetor_parametro_referencia)
 
-    # A função retorna a matriz Matriz_dados_pulsos e o vetor vetor_parametro_referencia.
-    return Matriz_dados_pulsos, vetor_parametro_referencia
+    # A função retorna a matriz Matriz_Dados_Pulsos e o vetor vetor_parametro_referencia.
+    return Matriz_Dados_Pulsos, vetor_parametro_referencia
 
 ### -------------------------------------------------------------------------------------------------------------------------------------------- ###
 
@@ -179,22 +180,22 @@ def amostras_janelamento(amostras, parametro_referencia, n_janelamento):
 # Definição da função para a separação dos dados em treino e teste.
 
 # Definição da função para a separação dos dados em treino e teste.
-def dados_treino_teste(Matriz_dados_pulsos, vetor_parametro_referencia):
+def dados_treino_teste(Matriz_Dados_Pulsos, vetor_parametro_referencia):
     
     # Obs.: certifique-se que a Matriz e o vetor tenham a mesma quantidade de linhas.
     
     # Caso a matriz dos dados dos pulsos de sinais e o vetor de parâmetros de referência tenham o mesmo tamanho.
-    if len(Matriz_dados_pulsos) == len(vetor_parametro_referencia):
+    if len(Matriz_Dados_Pulsos) == len(vetor_parametro_referencia):
         
         # Definição do índice da metade da matriz. 
         # Obs.: nesse caso está configurado para metade dos dados serem de treino e teste.
-        indice_metade = len(Matriz_dados_pulsos) // 2
+        indice_metade = len(Matriz_Dados_Pulsos) // 2
         
-        # A primeira metade corresponde a matriz Matriz_dados_pulsos_treino.
-        Matriz_dados_pulsos_treino = Matriz_dados_pulsos[ : indice_metade]
+        # A primeira metade corresponde a matriz Matriz_Dados_Pulsos_Treino.
+        Matriz_Dados_Pulsos_Treino = Matriz_Dados_Pulsos[ : indice_metade]
         
-        # A segunda metade corresponde a matriz Matriz_dados_pulsos_teste.
-        Matriz_dados_pulsos_teste = Matriz_dados_pulsos[indice_metade : ]
+        # A segunda metade corresponde a matriz Matriz_Dados_Pulsos_Teste.
+        Matriz_Dados_Pulsos_Teste = Matriz_Dados_Pulsos[indice_metade : ]
         
         # A primeira metade do vetor corresponde ao vetor vetor_parametro_referencia_treino.
         vetor_parametro_referencia_treino = vetor_parametro_referencia[ : indice_metade]
@@ -212,6 +213,6 @@ def dados_treino_teste(Matriz_dados_pulsos, vetor_parametro_referencia):
         exit(1)
     
     # A função retorna a matriz dos dados de pulsos de sinais dividida em treino e teste, assim como o vetor dos parâmetros de referência.    
-    return Matriz_dados_pulsos_treino, Matriz_dados_pulsos_teste, vetor_parametro_referencia_treino, vetor_parametro_referencia_teste
+    return Matriz_Dados_Pulsos_Treino, Matriz_Dados_Pulsos_Teste, vetor_parametro_referencia_treino, vetor_parametro_referencia_teste
         
 ### -------------------------------------------------------------------------------------------------------------------------------------------- ###

@@ -1,13 +1,14 @@
-# Projeto ATLAS - Reconstrução de sinal - Método da desconvolução de sinais.
+# EXPERIMENTO ATLAS - Reconstrução de sinal - Método de desconvolução de sinais - Estimação da amplitude.
 # Autor: Guilherme Barroso Morett.
-# Data: 06 de maio de 2024.
+# Data: 25 de junho de 2024.
 
-# Objetivo do código: análise do erro absoluto do parâmetro da amplitude pelo método da desconvolução de sinais - P = N.
+# Objetivo do código: análise do erro absoluto do parâmetro da amplitude pelo método de desconvolução de sinais - P = N.
 
-""" Organização do Código:
+"""
+Organização do Código:
 
 Importação de arquivos.
-Leitura dos dados de ocupação: leitura_dados_ocupacao.py
+Leitura dos dados de ocupação: leitura_dados_ocupacao_desconvolucao.py
 Método da desconvolução: metodo_desconvolucao.py
 
 Funções presentes:
@@ -23,7 +24,6 @@ Saída: nada.
 3) Instrução principal do código.
 Entrada: nada.
 Saída: nada.
-
 """
 
 # Importação das bibliotecas.
@@ -33,7 +33,7 @@ import os
 from termcolor import colored
 
 # Importação dos arquivos.
-from leitura_dados_ocupacao import *
+from leitura_dados_ocupacao_desconvolucao import *
 from metodo_desconvolucao_P_igual_N import *
 
 # Impressão de uma linha que representa o início do programa.
@@ -42,7 +42,7 @@ print("\n-----------------------------------------------------------------------
 # Título do programa.
 
 # A variável titulo_programa armazena o título em negrito.
-titulo_programa = colored("Análise do erro de estimação da amplitude pelo método da desconvolução de sinais - P = N:\n", attrs=["bold"])
+titulo_programa = colored("Análise do erro de estimação da amplitude pelo método de desconvolução de sinais - P = N:\n", attrs=["bold"])
 
 # Impressão do título do programa.
 print(titulo_programa)
@@ -78,22 +78,19 @@ def histograma_erro_amplitude(n_ocupacao, lista_erro_amplitude, media_erro_ampli
     vetor_erro_amplitude = np.array(lista_erro_amplitude)
 
     # Nomeação do eixo x de acordo com os demais parâmetros.
-    #plt.xlabel('Erro de estimação da amplitude (ADC Count)', fontsize = 18)
-    plt.xlabel('Amplitude estimation error (ADC Count)', fontsize = 18)
+    plt.xlabel('Erro de estimação da amplitude (ADC Count)', fontsize = 18)
 
     # Definição do tamanho dos números do eixo x.    
     plt.xticks(fontsize = 16)
 
     # Nomeação do eixo y.
-    #plt.ylabel('Número de eventos', fontsize = 18)
-    plt.ylabel('Number of events', fontsize = 18)
+    plt.ylabel('Número de eventos', fontsize = 18)
     
     # Definição do tamanho dos números do eixo y.
     plt.yticks(fontsize = 16)
 
     # A variável texto recebe uma string com as informações de interesse.
-    #texto = f"Média: {round(media_erro_amplitude, 6)} \n Variância: {round(var_erro_amplitude, 6)} \n Desvio padrão: {round(desvio_padrao_erro_amplitude, 6)}"
-    texto = f"Mean: {round(media_erro_amplitude, 6)} \n Variance: {round(var_erro_amplitude, 6)} \n Standard Deviation: {round(desvio_padrao_erro_amplitude, 6)}"
+    texto = f"Média: {round(media_erro_amplitude, 6)} \n Variância: {round(var_erro_amplitude, 6)} \n Desvio padrão: {round(desvio_padrao_erro_amplitude, 6)}"
     
     # Definição do histograma a partir do vetor vetor_erro_amplitude.
     plt.hist(vetor_erro_amplitude, bins = 100, range = [-200, 200], edgecolor = 'black', linewidth=1.2)
@@ -105,7 +102,7 @@ def histograma_erro_amplitude(n_ocupacao, lista_erro_amplitude, media_erro_ampli
     bbox=dict(facecolor='white', alpha=0.5),
     fontsize = 14)
     
-    plt.title(f"Occupancy (OC.) = {n_ocupacao}", fontsize=18)
+    plt.title(f"Ocupação (OC.) = {n_ocupacao}", fontsize=18)
 
     # Criação de grid.
     plt.grid()
@@ -115,7 +112,7 @@ def histograma_erro_amplitude(n_ocupacao, lista_erro_amplitude, media_erro_ampli
 
 ### -------------------------------------------------------------------------------------------------------------------------------------------- ###
 
-### -------------------------------------- 4) 4) INSTRUÇÃO PRINCIPAL DO CÓDIGO (MAIN)) --------------------------------------------------------- ###
+### -------------------------------------- 3) INSTRUÇÃO PRINCIPAL DO CÓDIGO (MAIN)) --------------------------------------------------------- ###
 
 # Definição da instrução principal (main) para esse código.
 def principal_histograma_erro_amplitude_desconvolucao():
@@ -123,7 +120,7 @@ def principal_histograma_erro_amplitude_desconvolucao():
     # A variável n_ocupacao armazena o valor digitado da ocupação desejada no terminal pelo usuário.
     n_ocupacao = float(input("Digite o valor da ocupação desejada: "))
 
-    # A variável valores_ocupacao é uma lista com os valores aceitáveis de ocupação de 0 até 100.
+    # A variável valores_ocupacao é uma lista com os valores aceitáveis de ocupação de 0 até 100 com incremento de 10.
     valores_ocupacao = list(range(0,101,10))
 
     # Caso o valor digitado armazenado na variável n_ocupacao não estiver presente na lista valores_ocupacao.
@@ -141,7 +138,7 @@ def principal_histograma_erro_amplitude_desconvolucao():
     # A variável n_janelamento armazena a quantidade de janelamento especificada no terminal pelo usuário.
     n_janelamento = int(input("Digite a quantidade de janelamento: "))
 
-    # A variável valores_janelamento é uma lista com os valores aceitáveis do janelamento de 7 até 19 com incremento de dois.
+    # A variável valores_janelamento é uma lista com os valores aceitáveis do janelamento de 7 até 19 com incremento de 2.
     valores_janelamento = list(range(7,20,2))
 
     # Caso o valor digitado armazenado na variável n_janelamento não estiver presente na lista valores_janelamento.
@@ -157,13 +154,13 @@ def principal_histograma_erro_amplitude_desconvolucao():
     
     Matriz_Dados_OC = leitura_dados_ocupacao(n_ocupacao)
     
-    Matriz_Dados_OC_sem_pedestal = retirada_pedestal(Matriz_Dados_OC)
+    Matriz_Dados_OC_Sem_Pedestal = retirada_pedestal(Matriz_Dados_OC)
     
-    vetor_amostras_pulsos, vetor_amplitude_referencia, _ = amostras_pulsos_e_referencia(Matriz_Dados_OC_sem_pedestal)
+    vetor_amostras_pulsos, vetor_amplitude_referencia, _ = amostras_pulsos_e_referencia(Matriz_Dados_OC_Sem_Pedestal)
     
-    Matriz_dados_pulsos, vetor_parametro_referencia = amostras_janelamento(vetor_amostras_pulsos, vetor_amplitude_referencia, n_janelamento)
+    Matriz_Dados_Pulsos, vetor_parametro_referencia = amostras_janelamento(vetor_amostras_pulsos, vetor_amplitude_referencia, n_janelamento)
     
-    lista_erro_amplitude = desconvolucao_P_igual_N(Matriz_dados_pulsos, vetor_parametro_referencia, n_janelamento)
+    lista_erro_amplitude = metodo_desconvolucao_P_igual_N(Matriz_Dados_Pulsos, vetor_parametro_referencia, n_janelamento)
     
     media_erro_amplitude, var_erro_amplitude, desvio_padrao_erro_amplitude = dados_estatisticos_erro_amplitude(lista_erro_amplitude)
     

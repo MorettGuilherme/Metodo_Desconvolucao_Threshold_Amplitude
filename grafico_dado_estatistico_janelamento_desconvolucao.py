@@ -1,10 +1,11 @@
-# Projeto ATLAS - Reconstrução de sinal - Método da desconvolução de sinais.
+# Experimento ATLAS - Reconstrução de sinal - Método de Desconvolução de Sinal - Estimação da amplitude.
 # Autor: Guilherme Barroso Morett.
-# Data: 06 de maio de 2024.
+# Data: 27 de junho de 2024.
 
-# Objetivo do código: gráfico dos dados estatíticos ao longo das ocupações de acordo com o janelamento para o método da desconvolução de sinais.
+# Objetivo do código: gráfico dos dados estatíticos ao longo das ocupações de acordo com o janelamento para o método de Desconvolução de Sinal.
 
-""" Organização do Código:
+""" 
+Organização do Código:
 
 Leitura dos dados estatísticos de todas as ocupações para um determinado janelamento.
 
@@ -21,7 +22,6 @@ Saída: nada.
 3) Instrução principal do código.
 Entrada: nada.
 Saída: nada.
-
 """
 
 # Importação das bibliotecas.
@@ -36,7 +36,7 @@ print("\n-----------------------------------------------------------------------
 # Título do programa.
 
 # A variável titulo_programa armazena o título em negrito.
-titulo_programa = colored("Plote do gráfico do dado estatístico do erro de estimação da amplitude ao longo das ocupações para um determinado janelamento pelo método da desconvolução de sinais - P = N:\n", attrs=["bold"])
+titulo_programa = colored("Plote do gráfico do dado estatístico do erro de estimação da amplitude ao longo das ocupações para um determinado janelamento pelo método de Desconvolução de Sinal - P = N:\n", attrs=["bold"])
 
 # Impressão do título do programa.
 print(titulo_programa)
@@ -78,7 +78,7 @@ def leitura_dados_estatisticos_janelamento(n_janelamento):
 
 ### -------------------------------------------------------------------------------------------------------------------------------------------- ###
 
-### ----------- 2) INSTRUÇÃO PARA O PLOTE DO GRÁFICO DOS DADO ESTATÍSTICOS AO LONGO DAS OCUPAÇÕES PARA UM DETERMIANDO JANELAMENTO ------------- ###
+### ----------- 2) INSTRUÇÃO PARA O PLOTE DO GRÁFICO DOS DADOS ESTATÍSTICOS AO LONGO DAS OCUPAÇÕES PARA UM DETERMINADO JANELAMENTO ------------- ###
 
 # Definição da função para o plote do gráfico do dado estatístico ao longo das ocupações para um determinado janelamento.
 def grafico_dado_estatistico_janelamento(dado_estatistico, Matriz_Dados_Estatisticos_Janelamento):
@@ -92,7 +92,7 @@ def grafico_dado_estatistico_janelamento(dado_estatistico, Matriz_Dados_Estatist
     # Definição da variável indice_coluna_var que armazena o valor do índice da coluna das variâncias.
     indice_coluna_var = 2
     
-    # Definição da variável indice_coluna_DP que armazena o valor do índice da coluna dos desvios padrões.
+    # Definição da variável indice_coluna_DP que armazena o valor do índice da coluna dos desvios padrão.
     indice_coluna_DP = 3
     
     # Definição do eixo das abscissas.
@@ -114,7 +114,7 @@ def grafico_dado_estatistico_janelamento(dado_estatistico, Matriz_Dados_Estatist
     # Caso a variável dado_estatístico seja 2 (variância).
     elif dado_estatistico == 2:
         
-        # Definição do vetor dos dados estatisticos.
+        # Definição do vetor dos dados estatísticos.
         vetor_dados = Matriz_Dados_Estatisticos_Janelamento[: , indice_coluna_var]
         
         # Comando para o nome do eixo das ordenadas.
@@ -123,7 +123,7 @@ def grafico_dado_estatistico_janelamento(dado_estatistico, Matriz_Dados_Estatist
     # Caso a variável dado_estatistico seja 3 (desvio padrão).
     elif dado_estatistico == 3:
         
-        # Definição do vetor dos dados estatisticos.
+        # Definição do vetor dos dados estatísticos.
         vetor_dados = Matriz_Dados_Estatisticos_Janelamento[: , indice_coluna_DP]
         
         # Comando para o nome do eixo das ordenadas.
@@ -186,6 +186,8 @@ def principal_grafico_dado_estatistico_janelamento_desconvolucao():
     Matriz_Dados_Estatisticos_Janelamento = leitura_dados_estatisticos_janelamento(n_janelamento)
     
     grafico_dado_estatistico_janelamento(dado_estatistico, Matriz_Dados_Estatisticos_Janelamento)
+
+### -------------------------------------------------------------------------------------------------------------------------------------------- ###
     
 # Chamada da função principal do código.
 principal_grafico_dado_estatistico_janelamento_desconvolucao()

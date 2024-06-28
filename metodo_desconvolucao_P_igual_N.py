@@ -1,8 +1,8 @@
-# Projeto ATLAS - Reconstrução de sinal - Método da desconvolução de sinais.
+# EXPERIMENTO ATLAS - Reconstrução de sinal - Método de Desconvolução de Sinal - Estimação da amplitude.
 # Autor: Guilherme Barroso Morett.
-# Data: 06 de maio de 2024.
+# Data: 27 de junho de 2024.
 
-# Objetivo do código: aplicação do método da desconvolução de sinais - P = N.
+# Objetivo do código: aplicação do método de Desconvolução de Sinal - P = N.
 
 """ Organização do Código:
 
@@ -12,7 +12,7 @@ Funções presentes:
 Entrada: número de janelamento.
 Saída: matriz H.
 
-2) Instrução para o método da desconvolução para o caso N = P.
+2) Instrução para o método de Desconvolução para o caso N = P.
 Entrada: Matriz com os pulsos de sinais e o vetor da amplitude de referência.
 Saída: nada.
 
@@ -288,20 +288,20 @@ def matriz_H(n_janelamento):
 
 ### ---------------------------------------- 2) FUNÇÃO DO MÉTODO DE DESCONVOLUÇÃO -------------------------------------------------------------- ###
 
-# Definição da função desconvolucao.
-def desconvolucao_P_igual_N(Matriz_pulsos_sinais, vetor_amplitude_referencia, n_janelamento):  
+# Definição da função para o método de Desconvolução de Sinais.
+def metodo_desconvolucao_P_igual_N(Matriz_Pulsos_Sinais, vetor_amplitude_referencia, n_janelamento):  
     
     # Criação da lista vazia para armazenar os erros calculados para a amplitude. 
     lista_erro_amplitude = []
 
-    # Para o índice de zero até o número de linhas da matriz Matriz_pulsos_sinais.
-    for indice_linha in range(len(Matriz_pulsos_sinais)):
+    # Para o índice de zero até o número de linhas da matriz Matriz_Pulsos_Sinais.
+    for indice_linha in range(len(Matriz_Pulsos_Sinais)):
         
         # A variável H recebe o retorno da função matriz_H.
         H = matriz_H(n_janelamento)
     
-        # O vetor vetor_pulsos_sinais corresponde a linha de índice indice_linha da matriz Matriz_pulsos_sinais.    
-        vetor_pulsos_sinais = Matriz_pulsos_sinais[indice_linha]
+        # O vetor vetor_pulsos_sinais corresponde a linha de índice indice_linha da matriz Matriz_Pulsos_Sinais.    
+        vetor_pulsos_sinais = Matriz_Pulsos_Sinais[indice_linha]
     
         # A amplitude de referência é o elemento de índice indice_linha do vetor vetor_amplitude_referencia.
         valor_amplitude_referencia = vetor_amplitude_referencia[indice_linha]

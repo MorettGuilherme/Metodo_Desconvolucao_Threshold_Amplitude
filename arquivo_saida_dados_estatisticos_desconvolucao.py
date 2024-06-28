@@ -1,15 +1,16 @@
-# Projeto ATLAS - Reconstrução de sinal - Método da desconvolução de sinais.
+# EXPERIMENTO ATLAS - Reconstrução de sinal - Método de Desconvolução de Sinal - Estimação da amplitude.
 # Autor: Guilherme Barroso Morett.
-# Data: 06 de maio de 2024.
+# Data: 27 de junho de 2024.
 
-# Objetivo do código: geração de arquivos de saída baseados nos dados estatísticos dos histogramas do erro de estimação pelo método da desconvolução de sinais.
+# Objetivo do código: geração de arquivos de saída baseados nos dados estatísticos dos histogramas do erro de estimação pelo método de Desconvolução de Sinal.
 
-""" Organização do Código:
+""" 
+Organização do Código:
 
 Importação de arquivos.
-Leitura dos dados de ocupação: leitura_dados_ocupacao.py
-Método da desconvolução: metodo_desconvolucao.py
-Histograma do erro da estimação da amplitude pelo método da desconvolução: histograma_erro_amplitude_desconvolucao.py
+Leitura dos dados de ocupação: leitura_dados_ocupacao_desconvolucao.py
+Método da Desconvolução: metodo_desconvolucao.py
+Histograma do erro da estimação da amplitude pelo método da Desconvolução: histograma_erro_amplitude_desconvolucao.py
 
 Funções presentes:
 
@@ -17,14 +18,13 @@ Funções presentes:
 Entrada: lista com o erro de estimação da amplitude.
 Saída: a média, a variância e o desvio padrão do erro de estimação.
 
-2) Instrução para salvar os dados estatísticos do erro de estimação da amplitude para determinada ocupação em uma arquivo de saída.
+2) Instrução para salvar os dados estatísticos do erro de estimação da amplitude para determinada ocupação em um arquivo de saída.
 Entrada: a média, a variância e o desvio padrão do erro de estimação da amplitude.
 Saída: nada.
 
 3) Instrução principal do código.
 Entrada: nada.
 Saída: nada.
-
 """
 # Importação das bibliotecas.
 import numpy as np
@@ -35,7 +35,7 @@ from tqdm import tqdm
 import time
 
 # Importação dos arquivos.
-from leitura_dados_ocupacao import *
+from leitura_dados_ocupacao_desconvolucao import *
 from metodo_desconvolucao_P_igual_N import *
 
 # Impressão de uma linha que representa o início do programa.
@@ -44,7 +44,7 @@ print("\n-----------------------------------------------------------------------
 # Título do programa.
 
 # A variável titulo_programa armazena o título em negrito.
-titulo_programa = colored("Geração de arquivos de saída baseados nos dados estatísticos dos histogramas do erro de estimação pelo método da desconvolução de sinais - P = N:\n", attrs=["bold"])
+titulo_programa = colored("Geração de arquivos de saída baseados nos dados estatísticos dos histogramas do erro de estimação pelo método de Desconvolução de Sinal - P = N:\n", attrs=["bold"])
 
 # Impressão do título do programa.
 print(titulo_programa)
@@ -73,7 +73,7 @@ def dados_estatisticos_erro_amplitude(lista_erro_amplitude):
 
 ### ---------------- 2) INSTRUÇÃO PARA A IMPRESSÃO DOS DADOS ESTATÍSTICOS DO ERRO DE ESTIMAÇÃO DA AMPLITUDE EM UM ARQUIVO DE SAÍDA ------------- ###
 
-# Definição da função para salvar os dados estatísticos do erro de estimação da amplitude em arquivos de saída.
+# Definição da função para salvar os dados estatísticos do erro de estimação da amplitude em arquivo de saída.
 def arquivo_saida_dados_estatisticos_erro_amplitude(n_ocupacao, n_janelamento, media_erro_amplitude, var_erro_amplitude, desvio_padrao_erro_amplitude):
 
     # Definição do título presente no arquivo de saída.
@@ -153,13 +153,13 @@ def principal_arquivo_saida_dados_estatisticos_desconvolucao():
     
             Matriz_Dados_OC = leitura_dados_ocupacao(numero_ocupacao)
     
-            Matriz_Dados_OC_sem_pedestal = retirada_pedestal(Matriz_Dados_OC)
+            Matriz_Dados_OC_Sem_Pedestal = retirada_pedestal(Matriz_Dados_OC)
     
-            vetor_amostras_pulsos, vetor_amplitude_referencia, _ = amostras_pulsos_e_referencia(Matriz_Dados_OC_sem_pedestal)
+            vetor_amostras_pulsos, vetor_amplitude_referencia, _ = amostras_pulsos_e_referencia(Matriz_Dados_OC_Sem_Pedestal)
     
-            Matriz_dados_pulsos, vetor_parametro_referencia = amostras_janelamento(vetor_amostras_pulsos, vetor_amplitude_referencia, n_janelamento)
+            Matriz_Dados_Pulsos, vetor_parametro_referencia = amostras_janelamento(vetor_amostras_pulsos, vetor_amplitude_referencia, n_janelamento)
     
-            lista_erro_amplitude = desconvolucao_P_igual_N(Matriz_dados_pulsos, vetor_parametro_referencia, n_janelamento)
+            lista_erro_amplitude = metodo_desconvolucao_P_igual_N(Matriz_Dados_Pulsos, vetor_parametro_referencia, n_janelamento)
     
             media_erro_amplitude, var_erro_amplitude, desvio_padrao_erro_amplitude = dados_estatisticos_erro_amplitude(lista_erro_amplitude)
     

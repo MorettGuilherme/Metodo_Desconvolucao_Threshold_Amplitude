@@ -1,14 +1,15 @@
-# Projeto ATLAS - Reconstrução de sinal - Método da desconvolução de sinais.
+# EXPERIMENTO ATLAS - Reconstrução de sinal - Método de Desconvolução de Sinal - Estimação da amplitude.
 # Autor: Guilherme Barroso Morett.
-# Data: 06 de maio de 2024.
+# Data: 27 de junho de 2024.
 
-# Objetivo do código: implementação da validação cruzada para o método de desconvolução de sinais.
+# Objetivo do código: implementação da validação cruzada para o método de Desconvolução de Sinal.
 
-""" Organização do código:
+""" 
+Organização do código:
 
 Importação de arquivos.
-Leitura dos dados de ocupação: leitura_dados_ocupacao.py
-Método da desconvolução: metodo_desconvolucao.py
+Leitura dos dados de ocupação: leitura_dados_ocupacao_desconvolucao.py
+Método da Desconvolução: metodo_desconvolucao_P_igual_N.py
 
 Funções presentes:
 
@@ -19,12 +20,11 @@ Saída: nada.
 2) Instrução da validação cruzada K-Fold.
 Entrada: matriz com os pulsos de sinais e o vetor das amplitudes de referência.
 Saída: nada.
-Obs.: no método da desconvolução, não há separação dos dados em treino e teste. Logo os dados estatísticos advém de cada um dos blocos.
+Obs.: no método da Desconvolução, não há separação dos dados em treino e teste. Logo os dados estatísticos advém de cada um dos blocos.
 
 3) Instrução principal do código.
 Entrada: nada.
 Saída: nada.
-
 """
 
 # Importação de bibliotecas.
@@ -35,7 +35,7 @@ import time
 from termcolor import colored
 
 # Importação dos arquivos.
-from leitura_dados_ocupacao import leitura_dados_ocupacao, retirada_pedestal, amostras_pulsos_e_referencia, amostras_janelamento 
+from leitura_dados_ocupacao_desconvolucao import leitura_dados_ocupacao, retirada_pedestal, amostras_pulsos_e_referencia, amostras_janelamento 
 from metodo_desconvolucao_P_igual_N import *
 
 # Impressão de uma linha que representa o início do programa.
@@ -44,7 +44,7 @@ print("\n-----------------------------------------------------------------------
 # Título do programa.
 
 # A variável titulo_programa armazena o título em negrito.
-titulo_programa = colored("Geração de arquivos de saída pela técnica de validação cruzada K-Fold para o método da desconvolução de sinais - P = N:\n", attrs=["bold"])
+titulo_programa = colored("Geração de arquivos de saída pela técnica de validação cruzada K-Fold para o método de Desconvolução de Sinal - P = N:\n", attrs=["bold"])
 
 # Impressão do título do programa.
 print(titulo_programa)
@@ -102,13 +102,13 @@ def arquivo_saida_dados_estatisticos_k_fold_erro(n_ocupacao, n_janelamento, medi
 ### ----------------------------------------------- 2) INSTRUÇÃO PARA A VALIDAÇÃO CRUZADA K-FOLD ----------------------------------------------- ###
 
 # Definição da instrução da técnica de validação cruzada K-Fold.
-def K_fold(Matriz_pulsos_sinais, vetor_parametro_referencia, n_ocupacao, n_janelamento):
+def K_fold(Matriz_Pulsos_Sinais, vetor_parametro_referencia, n_ocupacao, n_janelamento):
     
     # A variável quantidade_blocos armazena o número de blocos desejado.
     quantidade_blocos = 100
     
     # A variável elementos_bloco armazena o número de elementos presente em cada bloco.
-    elementos_bloco = len(Matriz_pulsos_sinais) // quantidade_blocos
+    elementos_bloco = len(Matriz_Pulsos_Sinais) // quantidade_blocos
     
     # Definição da lista vazia lista_bloco_media_erro.
     lista_blocos_media_erro = []
@@ -119,17 +119,17 @@ def K_fold(Matriz_pulsos_sinais, vetor_parametro_referencia, n_ocupacao, n_janel
     # Definição da lista vazia lista_bloco_DP_erro.
     lista_blocos_DP_erro = []
      
-    # Para indice_bloco de 0 até o tamnaho da matriz de dados de entrada com incremento igual a quantidade de elementos no bloco.
-    for indice_bloco in range(0, len(Matriz_pulsos_sinais), elementos_bloco):
+    # Para indice_bloco de 0 até o tamanho da matriz de dados de entrada com incremento igual a quantidade de elementos no bloco.
+    for indice_bloco in range(0, len(Matriz_Pulsos_Sinais), elementos_bloco):
         
         # Definição do bloco que contém a matriz dos pulsos de sinais.
-        Bloco_pulsos_sinais = Matriz_pulsos_sinais[indice_bloco : indice_bloco+elementos_bloco]
+        Bloco_pulsos_sinais = Matriz_Pulsos_Sinais[indice_bloco : indice_bloco+elementos_bloco]
             
         # Definição do bloco que contém o vetor da amplitude de referência.
         Bloco_vetor_amplitude_referencia = vetor_parametro_referencia[indice_bloco : indice_bloco+elementos_bloco]
         
         # A variável bloco_lista_erro_amplitude recebe o valor de retorno da função desconvolucao_P_igual_N.
-        Bloco_lista_erro_amplitude = desconvolucao_P_igual_N(Bloco_pulsos_sinais, Bloco_vetor_amplitude_referencia, n_janelamento)
+        Bloco_lista_erro_amplitude = metodo_desconvolucao_P_igual_N(Bloco_pulsos_sinais, Bloco_vetor_amplitude_referencia, n_janelamento)
         
         # Cálculo dos dados estatísticos de cada bloco.
         bloco_media_erro = np.mean(Bloco_lista_erro_amplitude)
@@ -175,7 +175,7 @@ def principal_K_fold():
     # A variável ocupacao_inicial armazena o valor inicial da ocupação que é 0.
     ocupacao_inicial = 0
     
-    # A variável ocupacao_final armazena o valor final da ocupação que é 10.
+    # A variável ocupacao_final armazena o valor final da ocupação que é 100.
     ocupacao_final = 100
     
     # A variável incremento_ocupacao armazena o valor de incremento entre as ocupações.
@@ -200,16 +200,17 @@ def principal_K_fold():
     
             Matriz_Dados_OC = leitura_dados_ocupacao(numero_ocupacao)
         
-            Matriz_Dados_OC_sem_pedestal = retirada_pedestal(Matriz_Dados_OC)
+            Matriz_Dados_OC_Sem_Pedestal = retirada_pedestal(Matriz_Dados_OC)
     
-            vetor_amostras_pulsos, vetor_amplitude_referencia, _ = amostras_pulsos_e_referencia(Matriz_Dados_OC_sem_pedestal)
+            vetor_amostras_pulsos, vetor_amplitude_referencia, _ = amostras_pulsos_e_referencia(Matriz_Dados_OC_Sem_Pedestal)
         
-            Matriz_dados_pulsos, vetor_parametro_referencia = amostras_janelamento(vetor_amostras_pulsos, vetor_amplitude_referencia, n_janelamento)
+            Matriz_Dados_Pulsos, vetor_parametro_referencia = amostras_janelamento(vetor_amostras_pulsos, vetor_amplitude_referencia, n_janelamento)
     
-            K_fold(Matriz_dados_pulsos, vetor_parametro_referencia, numero_ocupacao, n_janelamento)
+            K_fold(Matriz_Dados_Pulsos, vetor_parametro_referencia, numero_ocupacao, n_janelamento)
      
 # Chamada da função K_fold_OC.
-principal_K_fold()       
+principal_K_fold()
+       
 ### -------------------------------------------------------------------------------------------------------------------------------------------- ###
 
 # Impressão de uma linha que representa o fim do programa.
