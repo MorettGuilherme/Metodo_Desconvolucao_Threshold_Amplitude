@@ -8,7 +8,10 @@ A seguir estão listadas as pastas e também os arquivos contidos nesse reposit�
 - Essa pasta contém os dados estatísticos (média, variância e desvio padrão) do erro de estimação ao decorrer das ocupações para cada um dos janelamentos. O formato dos arquivos é txt.
 
 2) Dados_Ocupacoes_Free_Running
-- Essa pasta contém os dados organizados em colunas; respectivamente tempo (ns), pulsos de sinais (ADC Count), amplitude de referência (ADC Count) e fase de referência (ns) para cada uma das ocupações. O formato dos arquivos é txt.
+- Essa pasta contém os dados organizados em colunas; respectivamente tempo (ns), pulsos de sinais (ADC Count), amplitude de referência (ADC Count) e fase de referência (ns) para cada uma das ocupações. O formato dos arquivo é txt.
+
+3) K_Fold_amplitude_DP_Desempenho_Desconvolucao_OC
+Essa pasta contém os dados organizados em colunas; respectivamente tempo (ns), pulsos de sinais (ADC Count), amplitude de referência (ADC Count) e fase de referência (ns) para cada uma das ocupações. O formato dos arquivo é txt.
 
 3) K_Fold_amplitude_EME_Desempenho_Desconvolucao_OC
 - Essa pasta contém os dados organizado em colunas; respectivamente número de ocupação, média do EME, variância do EME, desvio padrão do EME. O formato do arquivo é txt.
@@ -43,6 +46,7 @@ A seguir estão listadas as pastas e também os arquivos contidos nesse reposit�
 - Função para o cálculo do desempenho do método de Desconvolução de Sinal pelo Erro Médio Quadrático (Mean Squared Error - MSE);
 - Função para o cálculo do desempenho do método de Desconvolução de Sinal pelo Erro Médio Absoluto (Mean Absolute Error - MAE);
 - Função para o cálculo do desempenho do método de Desconvolução de Sinal pela Relação Sinal-Ruído (Signal-to-Noise-Ratio - SNR);
+- Função para o cálculo do desempenho do método de Desconvolução de Sinal pelo desvio padrão (DP);
 - Instrução da validação cruzada K-Fold adaptada para o cálculo do desempenho do método de desconvolução de sinal;
 - Instrução principal do código.
 

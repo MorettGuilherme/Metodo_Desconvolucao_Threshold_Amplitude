@@ -1,8 +1,8 @@
-# Experimento ATLAS - Reconstrução de sinal - Método de Desconvolução de Sinal - Estimação da amplitude.
+# EXPERIMENTO ATLAS - Reconstrução de sinal - Método de Desconvolução de Sinal - Estimação da amplitude.
 # Autor: Guilherme Barroso Morett.
-# Data: 27 de junho de 2024.
+# Data: 28 de junho de 2024.
 
-# Objetivo do código: gráfico dos dados estatíticos ao longo das ocupações de acordo com o janelamento para o método de Desconvolução de Sinal.
+# Objetivo do código: gráfico dos dados estatísticos ao longo das ocupações de acordo com o janelamento para o método de Desconvolução de Sinal.
 
 """ 
 Organização do Código:
