@@ -31,7 +31,7 @@ import os
 from termcolor import colored
 
 # Impressão de uma linha que representa o início do programa.
-print("\n---------------------------------------------------------------------------------------------------------------------------------------\n")
+print("\n-------------------------------------------------------------------------------------------------------------------------------------\n")
 
 # Título do programa.
 
@@ -41,7 +41,7 @@ titulo_programa = colored("Plote do gráfico do desempenho (EME, MSE, MAE, SNR o
 # Impressão do título do programa.
 print(titulo_programa)
 
-### ------------ 1) FUNÇÃO PARA A LEITURA DOS DADOS ESTATÍSTICOS DO DESEMPENHO DO MÉTODO DE DESCONVOLUÇÃO DE SINAL VERSÃO THRESHOLD ------------ ###
+### ---------- 1) FUNÇÃO PARA A LEITURA DOS DADOS ESTATÍSTICOS DO DESEMPENHO DO MÉTODO DE DESCONVOLUÇÃO DE SINAL VERSÃO THRESHOLD ------------ ###
 
 # Definição da função para a leitura dos dados estatísticos do desempenho do método de Desconvolução de Sinal Versão Threshold.
 def leitura_dados_estatisticos_desempenho_desconvolucao_threshold(parametro, n_janelamento_ideal, opcao_avaliacao_desempenho):
@@ -76,7 +76,7 @@ def leitura_dados_estatisticos_desempenho_desconvolucao_threshold(parametro, n_j
     # A função retorna a matriz Matriz_Dados_Desempenho.
     return Matriz_Dados_Desempenho
 
-### -------------------------------------------------------------------------------------------------------------------------------------------- ###
+### ------------------------------------------------------------------------------------------------------------------------------------------ ###
 
 ### --- 2) FUNÇÃO PARA O PLOTE DOS GRÁFICO DO DADO ESTATÍSTICO DO DESEMPENHO AO LONGO DAS OCUPAÇÕES PARA O JANELAMENTO IDEAL PELO MÉTODO DE DESCONVOLUÇÃO THRESHOLD --- ###
 
@@ -106,6 +106,8 @@ def grafico_dado_estatistico_desempenho_desconvolucao_threshold(opcao_avaliacao_
     
     # Comando para o nome do eixo das abscissas.
     plt.xlabel("Ocupação (OC.)", fontsize = 18)
+    
+    # Definição do tamanho dos números do eixo das abscissas.
     plt.xticks(fontsize = 16)
     
     # Caso a variável opcao_avalicao_desempenho seja 1.
@@ -118,7 +120,7 @@ def grafico_dado_estatistico_desempenho_desconvolucao_threshold(opcao_avaliacao_
     if opcao_avaliacao_desempenho == 2:
               
         # Comando para o nome do eixo das ordenadas de acordo com o erro médio quadrático.
-        plt.ylabel(r"Média do erro médio quadrático (ADC Count)^2", fontsize = 18)
+        plt.ylabel(r"Média do erro médio quadrático (ADC Count)$^2$", fontsize = 18)
               
     # Caso a variável opcao_avalicao_desempenho seja 3.
     elif opcao_avaliacao_desempenho == 3:
@@ -138,7 +140,7 @@ def grafico_dado_estatistico_desempenho_desconvolucao_threshold(opcao_avaliacao_
         # Comando para o nome do eixo das ordenadas de acordo com a média do desvio padrão.
         plt.ylabel(r"Média do desvio padrão (ADC Count)", fontsize = 18)
         
-    # Comando que define o tamanho dos números do eixo das ordenadas.
+    # Definição do tamanho dos números do eixo das ordenadas.
     plt.yticks(fontsize = 16)
     
     # Comando para o plote do gráfico.
@@ -150,11 +152,11 @@ def grafico_dado_estatistico_desempenho_desconvolucao_threshold(opcao_avaliacao_
     # Comando para o plote.
     plt.show()
         
-### -------------------------------------------------------------------------------------------------------------------------------------------- ###        
+### ------------------------------------------------------------------------------------------------------------------------------------------ ###        
         
-### ---------------------------------------------------- 3) INSTRUÇÃO PRINCIPAL DO CÓDIGO (MAIN) -------------------------------------------------- ###
+### -------------------------------------------------- 3) INSTRUÇÃO PRINCIPAL DO CÓDIGO ------------------------------------------------------ ###
 
-# Definição da instrução principal (main) para esse código.
+# Definição da instrução principal do código.
 def principal_grafico_dado_estatistico_desempenho_desconvolucao_threshold():
     
     # Impressão de mensagem no terminal.
@@ -201,7 +203,7 @@ def principal_grafico_dado_estatistico_desempenho_desconvolucao_threshold():
     
         # Exibição de uma mensagem de alerta de que a opção solicitada é inválida.
         print("Essa opção é inválida!")
-        print("---------------------------------------------------------------------------------------------------------------------------------------")
+        print("---------------------------------------------------------------------------------------------------------------------------------")
         # A execução do programa é interrompida.
         exit(1)
           
@@ -216,14 +218,14 @@ def principal_grafico_dado_estatistico_desempenho_desconvolucao_threshold():
     
     Matriz_Dados_Desempenho = leitura_dados_estatisticos_desempenho_desconvolucao_threshold(parametro, n_janelamento_ideal, mecanismo_desempenho)
     grafico_dado_estatistico_desempenho_desconvolucao_threshold(opcao_avaliacao_desempenho, Matriz_Dados_Desempenho)
-
-### -------------------------------------------------------------------------------------------------------------------------------------------- ###
     
 # Chamada da instrução principal do código.
 principal_grafico_dado_estatistico_desempenho_desconvolucao_threshold()
 
+### ------------------------------------------------------------------------------------------------------------------------------------------ ###
+
 # Impressão de uma linha que representa o fim do programa.
-print("\n---------------------------------------------------------------------------------------------------------------------------------------\n")
+print("\n-------------------------------------------------------------------------------------------------------------------------------------\n")
     
     
             

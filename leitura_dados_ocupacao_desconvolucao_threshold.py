@@ -31,7 +31,7 @@ Saída: Matriz dos pulsos de sinais com a quantidade de linhas de acordo com o j
 import numpy as np
 import os
 
-### ------------------------------------------ 1) FUNÇÃO PARA A LEITURA DOS DADOS DE OCUPAÇÃO -------------------------------------------------- ###
+### ---------------------------------------- 1) FUNÇÃO PARA A LEITURA DOS DADOS DE OCUPAÇÃO -------------------------------------------------- ###
 
 # Definição da função para a leitura dos dados de ocupação no formato free running.
 def leitura_dados_ocupacao(n_ocupacao):
@@ -66,9 +66,9 @@ def leitura_dados_ocupacao(n_ocupacao):
     # A função retorna a matriz Matriz_Dados_OC.
     return Matriz_Dados_OC
 
-### -------------------------------------------------------------------------------------------------------------------------------------------- ###
+### ------------------------------------------------------------------------------------------------------------------------------------------ ###
 
-### ------------------------------------ 2) FUNÇÃO PARA A RETIRADA DO PEDESTAL DOS PULSOS DE SINAIS -------------------------------------------- ###
+### ---------------------------------- 2) FUNÇÃO PARA A RETIRADA DO PEDESTAL DOS PULSOS DE SINAIS -------------------------------------------- ###
 
 # Definição da função para a retirada do pedestal dos dados de entrada dos pulsos de sinais.
 def retirada_pedestal(Matriz_Dados_OC):
@@ -94,9 +94,9 @@ def retirada_pedestal(Matriz_Dados_OC):
     # A função retorna a Matriz_Dados_OC sem o valor do pedestal.
     return Matriz_Dados_OC_Sem_Pedestal
 
-### -------------------------------------------------------------------------------------------------------------------------------------------- ###
+### ------------------------------------------------------------------------------------------------------------------------------------------ ###
 
-### ---------------- 3) FUNÇÃO PARA A CONSTRUÇÃO DA MATRIZ DOS PULSOS DE SINAIS E O VETOR DO PARÂMETRO DE REFERÊNCIA --------------------------- ###
+### ---------------- 3) FUNÇÃO PARA A CONSTRUÇÃO DA MATRIZ DOS PULSOS DE SINAIS E O VETOR DO PARÂMETRO DE REFERÊNCIA ------------------------- ###
 
 # Definição da função que separa o vetor das amostras de pulsos de sinais e os pulsos de referência.
 def amostras_pulsos_e_referencia(Matriz_Dados_OC):
@@ -169,4 +169,4 @@ def amostras_janelamento(amostras, parametro_referencia, n_janelamento):
     # A função retorna a matriz Matriz_Dados_Pulsos e o vetor vetor_parametro_referencia.
     return Matriz_Dados_Pulsos, vetor_parametro_referencia
 
-### -------------------------------------------------------------------------------------------------------------------------------------------- ###
+### ------------------------------------------------------------------------------------------------------------------------------------------ ###

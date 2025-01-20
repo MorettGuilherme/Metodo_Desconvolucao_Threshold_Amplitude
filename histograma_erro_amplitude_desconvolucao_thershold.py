@@ -37,7 +37,7 @@ from leitura_dados_ocupacao_desconvolucao_threshold import *
 from metodo_desconvolucao_P_igual_N_threshold import *
 
 # Impressão de uma linha que representa o início do programa.
-print("\n---------------------------------------------------------------------------------------------------------------------------------------\n")
+print("\n-------------------------------------------------------------------------------------------------------------------------------------\n")
 
 # Título do programa.
 
@@ -47,7 +47,7 @@ titulo_programa = colored("Análise do erro de estimação da amplitude pelo mé
 # Impressão do título do programa.
 print(titulo_programa)
 
-### -------- 1) FUNÇÃO PARA O CÁLCULO DOS DADOS ESTATÍSTICOS DO ERRO DE ESTIMAÇÃO DA AMPLITUDE PELO MÉTODO DE DESCONVOLUÇÃO DE SINAL THRESHOLD ------ ###
+### ----- 1) FUNÇÃO PARA O CÁLCULO DOS DADOS ESTATÍSTICOS DO ERRO DE ESTIMAÇÃO DA AMPLITUDE PELO MÉTODO DE DESCONVOLUÇÃO DE SINAL THRESHOLD ----- ###
 
 # Definição da função para o cálculo dos dados estatísticos do erro de estimação da amplitude pelo método de Desconvolução de Sinal Versão Threshold.
 def dados_estatisticos_erro_estimacao_amplitude_desconvolucao_threshold(lista_erro_estimacao_amplitude):
@@ -67,9 +67,9 @@ def dados_estatisticos_erro_estimacao_amplitude_desconvolucao_threshold(lista_er
     # A função retorna a média, a variância e o desvio padrão dos dados do erro de estimação da amplitude.
     return media_erro_estimacao_amplitude, var_erro_estimacao_amplitude, desvio_padrao_erro_estimacao_amplitude
     
-### -------------------------------------------------------------------------------------------------------------------------------------------- ###
+### ------------------------------------------------------------------------------------------------------------------------------------------ ###
 
-### ----------- 2) INSTRUÇÃO PARA A CONSTRUÇÃO DO HISTOGRAMA DO TIPO A DO ERRO DE ESTIMAÇÃO DA AMPLITUDE PELO MÉTODO DE DESCONVOLUÇÃO DE SINAL THRESHOLD ----------- ###
+### --- 2) INSTRUÇÃO PARA A CONSTRUÇÃO DO HISTOGRAMA DO TIPO A DO ERRO DE ESTIMAÇÃO DA AMPLITUDE PELO MÉTODO DE DESCONVOLUÇÃO DE SINAL THRESHOLD --- ###
 
 # Definição da instrução para a confecção do histograma do tipo A do erro de estimação da amplitude pelo método de Desconvolução de Sinal Versão Threshold.
 def histograma_A_erro_estimacao_amplitude_desconvolucao_threshold(n_ocupacao, lista_erro_estimacao_amplitude, media_erro_estimacao_amplitude, var_erro_estimacao_amplitude, desvio_padrao_erro_estimacao_amplitude):
@@ -98,20 +98,44 @@ def histograma_A_erro_estimacao_amplitude_desconvolucao_threshold(n_ocupacao, li
     # A variável x_sup recebe o valor superior do eixo das abscissas para a amplitude.
     x_sup = 300
 
-    # A variável texto recebe uma string com as informações de interesse.
-    texto = f"Média: {round(media_erro_estimacao_amplitude, 6)} \n Variância: {round(var_erro_estimacao_amplitude, 6)} \n Desvio padrão: {round(desvio_padrao_erro_estimacao_amplitude, 6)}"
+    # Definição do tamanho dos números do eixo x.    
+    plt.xticks(fontsize = 16)
+
+    # Nomeação do eixo y.
+    plt.ylabel('Número de eventos', fontsize = 18)
     
-    # Definição do histograma a partir do vetor vetor_erro_estimacao_amplitude.
-    plt.hist(vetor_erro_estimacao_amplitude, bins = n_bins, range = [x_inf, x_sup], edgecolor = 'black', linewidth=1.2)
+    # Definição do tamanho dos números do eixo y.
+    plt.yticks(fontsize = 16)
+    
+    # A variável n_bins recebe a quantidade de bins presente no histograma.
+    n_bins = 100
+    
+    # Conversão das variáveis para strings adaptadas para o sistema numérico brasileiro.
+
+    media_erro_estimacao_amplitude = round(media_erro_estimacao_amplitude, 6)
+    media_erro_estimacao_amplitude = str(media_erro_estimacao_amplitude).replace('.', ',')
+    
+    var_erro_estimacao_amplitude = round(var_erro_estimacao_amplitude, 6)
+    var_erro_estimacao_amplitude= str(var_erro_estimacao_amplitude).replace('.', ',')
+    
+    desvio_padrao_erro_estimacao_amplitude = round(desvio_padrao_erro_estimacao_amplitude, 6)
+    desvio_padrao_erro_estimacao_amplitude = str(desvio_padrao_erro_estimacao_amplitude).replace('.', ',')
+
+    # A variável texto recebe uma string com as informações de interesse.
+    texto = f"Média: {media_erro_estimacao_amplitude} \n Variância: {var_erro_estimacao_amplitude} \n Desvio padrão: {desvio_padrao_erro_estimacao_amplitude}"
+
+    # Impressão do título do gráfico (recomendável para a apresentação de slides).
+    # plt.title(f"Ocupação {n_ocupacao}", fontsize = 18)
+
+    # Definição do histograma a partir do vetor vetor_erro_parametro.
+    plt.hist(vetor_erro_estimacao_amplitude, bins = n_bins, range = [x_inf, x_sup], edgecolor = 'black', linewidth = 1.2)
     
     # Posicionamento do texto no gráfico.
-    plt.text(0.99, 0.98, texto, horizontalalignment='right',
-    verticalalignment='top',
-    transform=plt.gca().transAxes,
-    bbox=dict(facecolor='white', alpha=0.5),
+    plt.text(0.99, 0.98, texto, horizontalalignment = 'right',
+    verticalalignment = 'top',
+    transform = plt.gca().transAxes,
+    bbox = dict(facecolor = 'white', alpha = 0.5),
     fontsize = 14)
-    
-    #plt.title(f"Ocupação (OC.) = {n_ocupacao}", fontsize=18)
 
     # Criação de grid.
     plt.grid()
@@ -119,18 +143,18 @@ def histograma_A_erro_estimacao_amplitude_desconvolucao_threshold(n_ocupacao, li
     # Exibição do gráfico.
     plt.show()
 
-### -------------------------------------------------------------------------------------------------------------------------------------------- ###
+### ------------------------------------------------------------------------------------------------------------------------------------------ ###
 
-### ------ 3) INSTRUÇÃO PARA A CONSTRUÇÃO DO HISTOGRAMA DO TIPO B DO ERRO DE ESTIMAÇÃO DA AMPLITUDE PELO MÉTODO DESCONVOLUÇÃO DE SINAL THRESHOLD ---------- ###
+### ---- 3) INSTRUÇÃO PARA A CONSTRUÇÃO DO HISTOGRAMA DO TIPO B DO ERRO DE ESTIMAÇÃO DA AMPLITUDE PELO MÉTODO DESCONVOLUÇÃO DE SINAL THRESHOLD ---- ###
 
 # Definição de instrução para o plot dos histogramas do tipo B do erro de estimação da amplitude para diferentes janelamentos para uma dada ocupação pelo método Desconvolução de Sinal Versão Threshold.
-def histograma_B_erro_estimacao_amplitude_desconvolucao_threshold(n_ocupacao, lista_erro_estimacao_amplitude_J7, media_erro_estimacao_amplitude_J7, var_erro_estimacao_amplitude_J7, desvio_padrao_erro_estimacao_amplitude_J7, lista_erro_estimacao_amplitude_J15, media_erro_estimacao_amplitude_J15, var_erro_estimacao_amplitude_J15, desvio_padrao_erro_estimacao_amplitude_J15, lista_erro_estimacao_amplitude_J19, media_erro_estimacao_amplitude_J19, var_erro_estimacao_amplitude_J19, desvio_padrao_erro_estimacao_amplitude_J19):
+def histograma_B_erro_estimacao_amplitude_desconvolucao_threshold(n_ocupacao, lista_erro_estimacao_amplitude_J7, media_erro_estimacao_amplitude_J7, var_erro_estimacao_amplitude_J7, desvio_padrao_erro_estimacao_amplitude_J7, lista_erro_estimacao_amplitude_J17, media_erro_estimacao_amplitude_J17, var_erro_estimacao_amplitude_J17, desvio_padrao_erro_estimacao_amplitude_J17, lista_erro_estimacao_amplitude_J19, media_erro_estimacao_amplitude_J19, var_erro_estimacao_amplitude_J19, desvio_padrao_erro_estimacao_amplitude_J19):
     
     # A lista do erro de estimação da amplitude para o janelamento 7 é convertida para o tipo numpy array.
     vetor_erro_estimacao_amplitude_J7 = np.array(lista_erro_estimacao_amplitude_J7)
     
     # A lista do erro de estimação da amplitude para o janelamento 15 é convertida para o tipo numpy array.
-    vetor_erro_estimacao_amplitude_J15 = np.array(lista_erro_estimacao_amplitude_J15)
+    vetor_erro_estimacao_amplitude_J17 = np.array(lista_erro_estimacao_amplitude_J17)
     
     # A lista do erro de estimação da amplitude para o janelamento 19 é convertida para o tipo numpy array.
     vetor_erro_estimacao_amplitude_J19 = np.array(lista_erro_estimacao_amplitude_J19)
@@ -156,18 +180,48 @@ def histograma_B_erro_estimacao_amplitude_desconvolucao_threshold(n_ocupacao, li
     # A variável x_sup recebe o valor superior do eixo das abscissas.
     x_sup = 300
     
+    # Conversão das variáveis para strings adaptadas para o sistema numérico brasileiro.
+    
+    media_erro_estimacao_amplitude_J7 = round(media_erro_estimacao_amplitude_J7, 6)
+    media_erro_estimacao_amplitude_J7 = str(media_erro_estimacao_amplitude_J7).replace('.', ',')
+    
+    var_erro_estimacao_amplitude_J7 = round(var_erro_estimacao_amplitude_J7, 6)
+    var_erro_estimacao_amplitude_J7 = str(var_erro_estimacao_amplitude_J7).replace('.', ',')
+    
+    desvio_padrao_erro_estimacao_amplitude_J7 = round(desvio_padrao_erro_estimacao_amplitude_J7, 6)
+    desvio_padrao_erro_estimacao_amplitude_J7 = str(desvio_padrao_erro_estimacao_amplitude_J7).replace('.', ',')
+    
+    media_erro_estimacao_amplitude_J17 = round(media_erro_estimacao_amplitude_J17, 6)
+    media_erro_estimacao_amplitude_J17 = str(media_erro_estimacao_amplitude_J17).replace('.', ',')
+    
+    var_erro_estimacao_amplitude_J17 = round(var_erro_estimacao_amplitude_J17, 6)
+    var_erro_estimacao_amplitude_J17 = str(var_erro_estimacao_amplitude_J17).replace('.', ',')
+    
+    desvio_padrao_erro_estimacao_amplitude_J17 = round(desvio_padrao_erro_estimacao_amplitude_J17, 6)
+    desvio_padrao_erro_estimacao_amplitude_J17 = str(desvio_padrao_erro_estimacao_amplitude_J17).replace('.', ',')
+    
+    media_erro_estimacao_amplitude_J19 = round(media_erro_estimacao_amplitude_J19, 6)
+    media_erro_estimacao_amplitude_J19 = str(media_erro_estimacao_amplitude_J19).replace('.', ',')
+    
+    var_erro_estimacao_amplitude_J19 = round(var_erro_estimacao_amplitude_J19, 6)
+    var_erro_estimacao_amplitude_J19 = str(var_erro_estimacao_amplitude_J19).replace('.', ',')
+    
+    desvio_padrao_erro_estimacao_amplitude_J19 = round(desvio_padrao_erro_estimacao_amplitude_J19, 6)
+    desvio_padrao_erro_estimacao_amplitude_J19 = str(desvio_padrao_erro_estimacao_amplitude_J19).replace('.', ',')
+    
+    
     # A variável legenda_J7 recebe a legenda do histograma para o janelamento 7.
-    legenda_J7 = f'Janelamento 7\nMédia: {round(media_erro_estimacao_amplitude_J7, 6)}\nVariância: {round(var_erro_estimacao_amplitude_J7,6)}\nDesvio Padrão: {round(desvio_padrao_erro_estimacao_amplitude_J7, 6)}'
+    legenda_J7 = f'Janelamento 7\nMédia: {media_erro_estimacao_amplitude_J7}\nVariância: {var_erro_estimacao_amplitude_J7}\nDesvio Padrão: {desvio_padrao_erro_estimacao_amplitude_J7}'
     
     # A variável legenda_J15 recebe a legenda do histograma para o janelamento 15.
-    legenda_J15 = f'Janelamento 15\nMédia: {round(media_erro_estimacao_amplitude_J15, 6)}\nVariância: {round(var_erro_estimacao_amplitude_J15,6)}\nDesvio Padrão: {round(desvio_padrao_erro_estimacao_amplitude_J15, 6)}'
+    legenda_J15 = f'Janelamento 17\nMédia: {media_erro_estimacao_amplitude_J17}\nVariância: {var_erro_estimacao_amplitude_J17}\nDesvio Padrão: {desvio_padrao_erro_estimacao_amplitude_J17}'
     
     # A variável legenda_J19 recebe a legenda do histograma para o janelamento 19.
-    legenda_J19 = f'Janelamento 19\nMédia: {round(media_erro_estimacao_amplitude_J19, 6)}\nVariância: {round(var_erro_estimacao_amplitude_J19,6)}\nDesvio Padrão: {round(desvio_padrao_erro_estimacao_amplitude_J19, 6)}'
+    legenda_J19 = f'Janelamento 19\nMédia: {media_erro_estimacao_amplitude_J19}\nVariância: {var_erro_estimacao_amplitude_J19}\nDesvio Padrão: {desvio_padrao_erro_estimacao_amplitude_J19}'
     
     # Definição dos histogramas para diferentes janelamentos e uma dada ocupação.
     plt.hist(vetor_erro_estimacao_amplitude_J7, bins = n_bins, color='blue', range = [x_inf, x_sup], histtype = 'step', label = legenda_J7)
-    plt.hist(vetor_erro_estimacao_amplitude_J15, bins = n_bins, color='green', range = [x_inf, x_sup], histtype = 'step', label = legenda_J15)
+    plt.hist(vetor_erro_estimacao_amplitude_J17, bins = n_bins, color='green', range = [x_inf, x_sup], histtype = 'step', label = legenda_J15)
     plt.hist(vetor_erro_estimacao_amplitude_J19, bins = n_bins, color='red', range = [x_inf, x_sup], histtype = 'step', label = legenda_J19)
     
     # Definição do título do histograma.
@@ -182,11 +236,11 @@ def histograma_B_erro_estimacao_amplitude_desconvolucao_threshold(n_ocupacao, li
     # Exibição do gráfico.
     plt.show()
 
-### -------------------------------------------------------------------------------------------------------------------------------------------- ###
+### ------------------------------------------------------------------------------------------------------------------------------------------ ###
 
-### -------------------------------------- 3) INSTRUÇÃO PRINCIPAL DO CÓDIGO (MAIN) --------------------------------------------------------- ###
+### ------------------------------------ 3) INSTRUÇÃO PRINCIPAL DO CÓDIGO -------------------------------------------------------------------- ###
 
-# Definição da instrução principal (main) para esse código.
+# Definição da instrução principal do código.
 def principal_histograma_erro_amplitude_desconvolucao_threshold():
     
 # A variável n_ocupacao armazena o valor digitado da ocupação desejada no terminal pelo usuário.
@@ -221,7 +275,7 @@ def principal_histograma_erro_amplitude_desconvolucao_threshold():
     
         # Exibição de uma mensagem de alerta de que a opção do tipo de histograma é inválida.
         print("A opção do tipo de histograma digitada é inválida!")
-        print("---------------------------------------------------------------------------------------------------------------------------------------")
+        print("---------------------------------------------------------------------------------------------------------------------------------")
         # A execução do programa é interrompida.
         exit(1)
     
@@ -239,7 +293,7 @@ def principal_histograma_erro_amplitude_desconvolucao_threshold():
     
             # Exibição de uma mensagem de alerta de que a quantidade de janelamento solicitada é inválida.
             print("Quantidade de janelamento inválida! Opções de janelamento: 7, 9, 11, 13, 15, 17, 19.")
-            print("---------------------------------------------------------------------------------------------------------------------------------------")
+            print("-----------------------------------------------------------------------------------------------------------------------------")
             # A execução do programa é interrompida.
             exit(1)
             
@@ -266,8 +320,8 @@ def principal_histograma_erro_amplitude_desconvolucao_threshold():
         
         # A variável n_janelamento_7 recebe a quantidade do janelamento 7.
         n_janelamento_J7 = 7
-        # A variável n_janelamento_15 recebe a quantidade do janelamento 15.
-        n_janelamento_J15 = 15
+        # A variável n_janelamento_15 recebe a quantidade do janelamento 17.
+        n_janelamento_J17 = 17
         # A variável n_janelamento_19 recebe a quantidade do janelamento 19.
         n_janelamento_J19 = 19
         
@@ -280,7 +334,7 @@ def principal_histograma_erro_amplitude_desconvolucao_threshold():
         vetor_amostras_pulsos, vetor_amplitude_referencia, vetor_fase_referencia = amostras_pulsos_e_referencia(Matriz_Dados_OC_Sem_Pedestal)
         
         Matriz_Pulsos_Sinais_Janelado_J7, vetor_amplitude_referencia_janelado_J7 = amostras_janelamento(vetor_amostras_pulsos, vetor_amplitude_referencia, n_janelamento_J7)
-        Matriz_Pulsos_Sinais_Janelado_J15, vetor_amplitude_referencia_janelado_J15 = amostras_janelamento(vetor_amostras_pulsos, vetor_amplitude_referencia, n_janelamento_J15)
+        Matriz_Pulsos_Sinais_Janelado_J17, vetor_amplitude_referencia_janelado_J17 = amostras_janelamento(vetor_amostras_pulsos, vetor_amplitude_referencia, n_janelamento_J17)
         Matriz_Pulsos_Sinais_Janelado_J19, vetor_amplitude_referencia_janelado_J19 = amostras_janelamento(vetor_amostras_pulsos, vetor_amplitude_referencia, n_janelamento_J19)
         
         # Chamada ordenada das funções.
@@ -288,17 +342,18 @@ def principal_histograma_erro_amplitude_desconvolucao_threshold():
         lista_erro_estimacao_amplitude_J7 = metodo_desconvolucao_threshold_P_igual_N(n_janelamento_J7, Matriz_Pulsos_Sinais_Janelado_J7, vetor_amplitude_referencia_janelado_J7)
         media_erro_estimacao_amplitude_J7, var_erro_estimacao_amplitude_J7, desvio_padrao_erro_estimacao_amplitude_J7 = dados_estatisticos_erro_estimacao_amplitude_desconvolucao_threshold(lista_erro_estimacao_amplitude_J7)
     
-        lista_erro_estimacao_amplitude_J15 = metodo_desconvolucao_threshold_P_igual_N(n_janelamento_J15, Matriz_Pulsos_Sinais_Janelado_J15, vetor_amplitude_referencia_janelado_J15)
-        media_erro_estimacao_amplitude_J15, var_erro_estimacao_amplitude_J15, desvio_padrao_erro_estimacao_amplitude_J15 = dados_estatisticos_erro_estimacao_amplitude_desconvolucao_threshold(lista_erro_estimacao_amplitude_J15)
+        lista_erro_estimacao_amplitude_J17 = metodo_desconvolucao_threshold_P_igual_N(n_janelamento_J17, Matriz_Pulsos_Sinais_Janelado_J17, vetor_amplitude_referencia_janelado_J17)
+        media_erro_estimacao_amplitude_J17, var_erro_estimacao_amplitude_J17, desvio_padrao_erro_estimacao_amplitude_J17 = dados_estatisticos_erro_estimacao_amplitude_desconvolucao_threshold(lista_erro_estimacao_amplitude_J17)
     
         lista_erro_estimacao_amplitude_J19 = metodo_desconvolucao_threshold_P_igual_N(n_janelamento_J19, Matriz_Pulsos_Sinais_Janelado_J19, vetor_amplitude_referencia_janelado_J19)
         media_erro_estimacao_amplitude_J19, var_erro_estimacao_amplitude_J19, desvio_padrao_erro_estimacao_amplitude_J19 = dados_estatisticos_erro_estimacao_amplitude_desconvolucao_threshold(lista_erro_estimacao_amplitude_J19)
     
-        histograma_B_erro_estimacao_amplitude_desconvolucao_threshold(n_ocupacao, lista_erro_estimacao_amplitude_J7, media_erro_estimacao_amplitude_J7, var_erro_estimacao_amplitude_J7, desvio_padrao_erro_estimacao_amplitude_J7, lista_erro_estimacao_amplitude_J15, media_erro_estimacao_amplitude_J15, var_erro_estimacao_amplitude_J15, desvio_padrao_erro_estimacao_amplitude_J15, lista_erro_estimacao_amplitude_J19, media_erro_estimacao_amplitude_J19, var_erro_estimacao_amplitude_J19, desvio_padrao_erro_estimacao_amplitude_J19)
+        histograma_B_erro_estimacao_amplitude_desconvolucao_threshold(n_ocupacao, lista_erro_estimacao_amplitude_J7, media_erro_estimacao_amplitude_J7, var_erro_estimacao_amplitude_J7, desvio_padrao_erro_estimacao_amplitude_J7, lista_erro_estimacao_amplitude_J17, media_erro_estimacao_amplitude_J17, var_erro_estimacao_amplitude_J17, desvio_padrao_erro_estimacao_amplitude_J17, lista_erro_estimacao_amplitude_J19, media_erro_estimacao_amplitude_J19, var_erro_estimacao_amplitude_J19, desvio_padrao_erro_estimacao_amplitude_J19)
     
 # Chamada da instrução principal do código.
 principal_histograma_erro_amplitude_desconvolucao_threshold()
 
-### -------------------------------------------------------------------------------------------------------------------------------------------- ###
+### ------------------------------------------------------------------------------------------------------------------------------------------ ###
+
 # Impressão de uma linha que representa o fim do programa.
-print("\n---------------------------------------------------------------------------------------------------------------------------------------\n")
+print("\n-------------------------------------------------------------------------------------------------------------------------------------\n")

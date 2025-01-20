@@ -38,7 +38,7 @@ from leitura_dados_ocupacao_desconvolucao_threshold import leitura_dados_ocupaca
 from metodo_desconvolucao_P_igual_N_threshold import *
 
 # Impressão de uma linha que representa o início do programa.
-print("\n---------------------------------------------------------------------------------------------------------------------------------------\n")
+print("\n-------------------------------------------------------------------------------------------------------------------------------------\n")
 
 # Título do programa.
 
@@ -49,7 +49,7 @@ titulo_programa = colored("Geração de arquivos de saída pela técnica de vali
 print(titulo_programa)
 
 
-### ---------------- 1) INSTRUÇÃO PARA SALVAR OS DADOS ESTATÍSTICOS DO K-FOLD PELO MÉTODO DE DESCONVOLUÇÃO DE SINAL THRESHOLD ------------------ ###
+### -------------- 1) INSTRUÇÃO PARA SALVAR OS DADOS ESTATÍSTICOS DO K-FOLD PELO MÉTODO DE DESCONVOLUÇÃO DE SINAL THRESHOLD ------------------ ###
 
 # Definição da função para salvar as médias dos dados estatísticos dos blocos em um arquivo de saída pelo método de Desconvolução de Sinal Versão Threshold.
 def arquivo_saida_dados_estatisticos_k_fold_erro_estimacao_desconvolucao_threshold(n_ocupacao, n_janelamento, media_dado_erro_estimacao, var_dado_erro_estimacao, DP_dado_erro_estimacao, dado):
@@ -72,33 +72,51 @@ def arquivo_saida_dados_estatisticos_k_fold_erro_estimacao_desconvolucao_thresho
     # Caminho completo para o arquivo de saída.
     caminho_arquivo_saida = os.path.join(pasta_saida, arquivo_saida)
 
-    # Verifica se o arquivo existe e está vazio
+    # Comando para tentar realizar uma operação.
     try:
+        
+        # Abre o arquivo presente no endereço caminho_arquivo_saida como a variável arquivo_saida_dados_estatisticos no modo leitura.
         with open(caminho_arquivo_saida, 'r') as arquivo_saida_dados_estatisticos:
+            
+            # A variável primeiro_caractere recebe o primeiro elemento presente no arquivo_saida_dados_estatisticos.
             primeiro_caractere = arquivo_saida_dados_estatisticos.read(1)
+            
+            # Caso não haja nada na variável primeiro_caractere.
             if not primeiro_caractere:
-                # Arquivo está vazio, escreva o título
+                
+                # Abre o arquivo presente no endereço caminho_arquivo_saida como file no modo acrescentar.
                 with open(caminho_arquivo_saida, 'a') as file:
+                    
+                    # Escreve o título no arquivo file.
                     file.write(titulo_arquivo_saida)
+                    
+    # Excessão de erro ao encontrar o arquivo no caminho fornecido.                
     except FileNotFoundError:
-        # Se o arquivo não existe, cria e escreve o título
+        
+        # Abre o arquivo presente no endereço caminho_arquivo_saida como file no modo escrita.
         with open(caminho_arquivo_saida, 'w') as file:
+            
+            # Escreve o título no arquivo file.
             file.write(titulo_arquivo_saida)
 
     # Comando para tentar realizar uma operação.
     try:
-        # Abre o arquivo de saída no modo de acrescentar (append).
+        
+        # Abre o arquivo presente no endereço caminho_arquivo_saida como arquivo_saida_dados_estatisticos no modo acrescentar.
         with open(caminho_arquivo_saida, "a") as arquivo_saida_dados_estatisticos:
-            # Escrita dos dados de interesse.
+            
+            # Escrita dos dados de interesse no arquivo_saida_dados_estatisticos.
             arquivo_saida_dados_estatisticos.write(f"{n_janelamento},{media_dado_erro_estimacao},{var_dado_erro_estimacao},{DP_dado_erro_estimacao}\n")
+   
     # Excessão.
     except Exception as e:
+        
         # Impressão de mensagem de alerta.
         print("Ocorreu um erro ao atualizar o arquivo de saída dos dados estatísticos:", str(e))
 
-### -------------------------------------------------------------------------------------------------------------------------------------------- ###
+### ------------------------------------------------------------------------------------------------------------------------------------------ ###
 
-### ---------------------- 2) INSTRUÇÃO PARA A VALIDAÇÃO CRUZADA K-FOLD PELO MÉTODO DE DESCONVOLUÇÃO DE SINAL THRESHOLD ------------------------ ###
+### -------------------- 2) INSTRUÇÃO PARA A VALIDAÇÃO CRUZADA K-FOLD PELO MÉTODO DE DESCONVOLUÇÃO DE SINAL THRESHOLD ------------------------ ###
 
 # Definição da instrução da técnica de validação cruzada K-Fold pelo método de Desconvolução de Sinal Versão Threshold.
 def K_fold_desconvolucao_threshold(Matriz_Pulsos_Sinais_Janelado, vetor_amplitude_referencia_janelado, n_ocupacao, n_janelamento):
@@ -164,11 +182,11 @@ def K_fold_desconvolucao_threshold(Matriz_Pulsos_Sinais_Janelado, vetor_amplitud
     # Salva a informação dos dados estatísticos do desvio padrão do erro de estimação da amplitude em seus respectivos arquivos de saída.
     arquivo_saida_dados_estatisticos_k_fold_erro_estimacao_desconvolucao_threshold(n_ocupacao, n_janelamento, media_DP_blocos_erro_estimacao_amplitude, var_DP_blocos_erro_estimacao_amplitude , DP_DP_blocos_erro_estimacao_amplitude, dado = "DP")
     
-### -------------------------------------------------------------------------------------------------------------------------------------------- ### 
+### ------------------------------------------------------------------------------------------------------------------------------------------ ### 
 
-### ---------------------------------------------- 3) INSTRUÇÃO PRINCIPAL DO CÓDIGO (MAIN) ----------------------------------------------------- ###
+### --------------------------------------------- 3) INSTRUÇÃO PRINCIPAL DO CÓDIGO ----------------------------------------------------------- ###
   
-# Definição da instrução principal (main) do código.
+# Definição da instrução principal do código.
 def principal_K_fold_desconvolucao_threshold():
     
     # A variável ocupacao_inicial armazena o valor inicial da ocupação que é 0.
@@ -210,7 +228,7 @@ def principal_K_fold_desconvolucao_threshold():
 # Chamada da instrução principal do código.
 principal_K_fold_desconvolucao_threshold()
        
-### -------------------------------------------------------------------------------------------------------------------------------------------- ###
+### ------------------------------------------------------------------------------------------------------------------------------------------ ###
 
 # Impressão de uma linha que representa o fim do programa.
-print("\n---------------------------------------------------------------------------------------------------------------------------------------\n")
+print("\n-------------------------------------------------------------------------------------------------------------------------------------\n")

@@ -26,6 +26,7 @@ Saída: nada.
 Entrada: nada.
 Saída: nada.
 """
+
 # Importação das bibliotecas.
 import numpy as np
 import matplotlib.pyplot as plt
@@ -39,7 +40,7 @@ from leitura_dados_ocupacao_desconvolucao_threshold import *
 from metodo_desconvolucao_P_igual_N_threshold import *
 
 # Impressão de uma linha que representa o início do programa.
-print("\n---------------------------------------------------------------------------------------------------------------------------------------\n")
+print("\n-------------------------------------------------------------------------------------------------------------------------------------\n")
 
 # Título do programa.
 
@@ -49,7 +50,7 @@ titulo_programa = colored("Geração de arquivos de saída baseados nos dados es
 # Impressão do título do programa.
 print(titulo_programa)
 
-### ----- 1) FUNÇÃO PARA O CÁLCULO DOS DADOS ESTATÍSTICOS DO ERRO DE ESTIMAÇÃO DA AMPLITUDE PELO MÉTODO DE DESCONVOLUÇÃO DE SINAL THRESHOLD ---- ###
+### --- 1) FUNÇÃO PARA O CÁLCULO DOS DADOS ESTATÍSTICOS DO ERRO DE ESTIMAÇÃO DA AMPLITUDE PELO MÉTODO DE DESCONVOLUÇÃO DE SINAL THRESHOLD ---- ###
 
 # Definição da função para o cálculo dos dados estatísticos do erro de estimação da amplitude pelo método de Desconvolução de Sinal Versão Threshold.
 def dados_estatisticos_erro_estimacao_amplitude_desconvolucao_threshold(lista_erro_estimacao_amplitude):
@@ -69,11 +70,11 @@ def dados_estatisticos_erro_estimacao_amplitude_desconvolucao_threshold(lista_er
     # A função retorna a média, a variância e o desvio padrão dos dados do erro de estimação da amplitude.
     return media_erro_estimacao_amplitude, var_erro_estimacao_amplitude, desvio_padrao_erro_estimacao_amplitude
     
-### -------------------------------------------------------------------------------------------------------------------------------------------- ###
+### ------------------------------------------------------------------------------------------------------------------------------------------ ###
 
-### ------ 2) INSTRUÇÃO PARA A IMPRESSÃO DOS DADOS ESTATÍSTICOS DO ERRO DE ESTIMAÇÃO DA AMPLITUDE EM UM ARQUIVO DE SAÍDA PELO MÉTODO DE DESCONVOLUÇÃO DE SINAL THRESHOLD ------ ###
+### ---- 2) INSTRUÇÃO PARA A IMPRESSÃO DOS DADOS ESTATÍSTICOS DO ERRO DE ESTIMAÇÃO DA AMPLITUDE EM UM ARQUIVO DE SAÍDA PELO MÉTODO DE DESCONVOLUÇÃO DE SINAL THRESHOLD ---- ###
 
-# Definição da função para salvar os dados estatísticos do erro de estimação da amplitude em arquivo de saída pelo método Desconvolução de Sinal Versão Threshold.
+# Definição da instrução para salvar os dados estatísticos do erro de estimação da amplitude em arquivo de saída pelo método Desconvolução de Sinal Versão Threshold.
 def arquivo_saida_dados_estatisticos_erro_estimacao_amplitude_desconvolucao_threshold(n_ocupacao, n_janelamento, media_erro_estimacao_amplitude, var_erro_estimacao_amplitude, desvio_padrao_erro_estimacao_amplitude):
 
     # Definição do título presente no arquivo de saída.
@@ -84,6 +85,7 @@ def arquivo_saida_dados_estatisticos_erro_estimacao_amplitude_desconvolucao_thre
 
     # Caso a pasta não exista.
     if not os.path.exists(pasta_saida):
+        
         # Criação da pasta de saída.
         os.makedirs(pasta_saida)
 
@@ -93,36 +95,53 @@ def arquivo_saida_dados_estatisticos_erro_estimacao_amplitude_desconvolucao_thre
     # Caminho completo para o arquivo de saída.
     caminho_arquivo_saida = os.path.join(pasta_saida, arquivo_saida)
 
-    # Verifica se o arquivo existe e está vazio
+    # Comando para tentar realizar uma operação.
     try:
+        
+        # Abre o arquivo presente no endereço caminho_arquivo_saida como a variável arquivo_saida_dados_estatisticos no modo leitura.
         with open(caminho_arquivo_saida, 'r') as arquivo_saida_dados_estatisticos:
+            
+            # A variável primeiro_caractere recebe o primeiro elemento presente no arquivo_saida_dados_estatisticos.
             primeiro_caractere = arquivo_saida_dados_estatisticos.read(1)
+            
+            # Caso não haja nada na variável primeiro_caractere.
             if not primeiro_caractere:
-                # Arquivo está vazio, escreva o título
+                
+                # Abre o arquivo presente no endereço caminho_arquivo_saida como file no modo acrescentar.
                 with open(caminho_arquivo_saida, 'a') as file:
+                    
+                    # Escreve o título no arquivo file.
                     file.write(titulo_arquivo_saida)
+    
+    # Excessão de erro ao encontrar o arquivo no caminho fornecido.                
     except FileNotFoundError:
-        # Se o arquivo não existe, cria e escreve o título
+        
+        # Abre o arquivo presente no endereço caminho_arquivo_saida como file no modo escrita.
         with open(caminho_arquivo_saida, 'w') as file:
+            
+            # Escreve o título no arquivo file.
             file.write(titulo_arquivo_saida)
 
     # Comando para tentar realizar uma operação.
     try:
-        # Abre o arquivo de saída no modo de acrescentar (append).
+        
+        # Abre o arquivo presente no endereço caminho_arquivo_saida como arquivo_saida_dados_estatisticos no modo acrescentar.
         with open(caminho_arquivo_saida, "a") as arquivo_saida_dados_estatisticos:
-            # Escrita dos dados de interesse.
+            
+            # Escrita dos dados de interesse no arquivo_saida_dados_estatisticos.
             arquivo_saida_dados_estatisticos.write(f"{n_ocupacao},{media_erro_estimacao_amplitude},{var_erro_estimacao_amplitude},{desvio_padrao_erro_estimacao_amplitude}\n")
         
     # Excessão.
     except Exception as e:
+        
         # Impressão de mensagem de alerta.
         print("Ocorreu um erro ao atualizar o arquivo de saída dos dados estatísticos:", str(e))
 
-### -------------------------------------------------------------------------------------------------------------------------------------------- ###
+### ------------------------------------------------------------------------------------------------------------------------------------------ ###
 
-### -------------------------------------- 3) INSTRUÇÃO PRINCIPAL DO CÓDIGO (MAIN) ------------------------------------------------------------- ###
+### ------------------------------------- 3) INSTRUÇÃO PRINCIPAL DO CÓDIGO ------------------------------------------------------------------- ###
 
-# Definição da instrução principal (main) para esse código.
+# Definição da instrução principal do código.
 def principal_arquivo_saida_dados_estatisticos_desconvolucao_threshold():
     
     # A variável ocupacao_inicial armazena o valor inicial da ocupação que é 0.
@@ -164,11 +183,11 @@ def principal_arquivo_saida_dados_estatisticos_desconvolucao_threshold():
             media_erro_amplitude, var_erro_amplitude, desvio_padrao_erro_amplitude = dados_estatisticos_erro_estimacao_amplitude_desconvolucao_threshold(lista_erro_amplitude)
     
             arquivo_saida_dados_estatisticos_erro_estimacao_amplitude_desconvolucao_threshold(numero_ocupacao, n_janelamento, media_erro_amplitude, var_erro_amplitude, desvio_padrao_erro_amplitude)
-            
-### -------------------------------------------------------------------------------------------------------------------------------------------- ###
 
 # Chamada da instrução principal do código.
 principal_arquivo_saida_dados_estatisticos_desconvolucao_threshold()
 
+### ------------------------------------------------------------------------------------------------------------------------------------------ ###
+
 # Impressão de uma linha que representa o fim do programa.
-print("\n---------------------------------------------------------------------------------------------------------------------------------------\n")
+print("\n-------------------------------------------------------------------------------------------------------------------------------------\n")

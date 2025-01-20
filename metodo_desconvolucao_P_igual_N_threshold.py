@@ -29,7 +29,7 @@ Saída: lista do erro de estimação da amplitude.
 # Importação das bibliotecas.
 import numpy as np
 
-### ---------------------------------- 1) DEFINIÇÃO DA FUNÇÃO PARA A CONSTRUÇÃO DA MATRIZ H ---------------------------------------------------- ###
+### ---------------------------------- 1) DEFINIÇÃO DA FUNÇÃO PARA A CONSTRUÇÃO DA MATRIZ H -------------------------------------------------- ###
 
 # Criação da função matriz_H.
 def matriz_H(n_janelamento):
@@ -310,9 +310,9 @@ def matriz_H(n_janelamento):
     # A função retorna a matriz H.
     return H, linha_pulso_central
 
-### -------------------------------------------------------------------------------------------------------------------------------------------- ###
+### ------------------------------------------------------------------------------------------------------------------------------------------ ###
 
-### ---------------------------------- 2) FUNÇÃO PARA A PRIMEIRA PARTE DO MÉTODO DE DESCONVOLUÇÃO DE SINAL ------------------------------------- ###
+### -------------------------------- 2) FUNÇÃO PARA A PRIMEIRA PARTE DO MÉTODO DE DESCONVOLUÇÃO DE SINAL ------------------------------------- ###
 
 # Obs.: a primeira parte consiste no cálculo no cálculo do vetor da amplitude estimada.
 # Definição da função da primeira parte do método de desconvolução de sinal.
@@ -358,9 +358,9 @@ def metodo_desconvolucao_vetor_amplitude_estimada(vetor_pulsos_sinais, Matriz_H)
     # A função retorna o vetor da amplitude estimada.
     return vetor_amplitude_estimada
 
-### -------------------------------------------------------------------------------------------------------------------------------------------- ###
+### ------------------------------------------------------------------------------------------------------------------------------------------ ###
 
-### -------------------- 3) FUNÇÃO PARA LOCALIZAR O ÍNDICE QUE CORRESPONDE AO PULSO CENTRAL DA MATRIZ H ---------------------------------------- ###
+### -------------------- 3) FUNÇÃO PARA LOCALIZAR O ÍNDICE QUE CORRESPONDE AO PULSO CENTRAL DA MATRIZ H -------------------------------------- ###
 
 # Definição da função para localizar o índice da linha referente ao pulso central da matriz H.
 def localizar_indice_pulso_central(n_janelamento, Matriz_H, linha_alvo_busca):
@@ -377,7 +377,7 @@ def localizar_indice_pulso_central(n_janelamento, Matriz_H, linha_alvo_busca):
     # A função retorna o indice da linha alvo de busca.
     return indice_linha_alvo
 
-### ---------------------------------------- 4) FUNÇÃO DO MÉTODO DE DESCONVOLUÇÃO DE SINAL ----------------------------------------------------- ###
+### ---------------------------------------- 4) FUNÇÃO DO MÉTODO DE DESCONVOLUÇÃO DE SINAL --------------------------------------------------- ###
 
 # Definição da função para o método de Desconvolução de Sinal.
 def metodo_desconvolucao_threshold_P_igual_N(n_janelamento, Matriz_Pulsos_Sinais_Janelado, vetor_amplitude_referencia_janelado):  
@@ -440,4 +440,4 @@ def metodo_desconvolucao_threshold_P_igual_N(n_janelamento, Matriz_Pulsos_Sinais
     # A função retorna a lista lista_erro_estimacao_amplitude.
     return lista_erro_estimacao_amplitude
 
-### -------------------------------------------------------------------------------------------------------------------------------------------- ###
+### ------------------------------------------------------------------------------------------------------------------------------------------ ###

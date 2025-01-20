@@ -1,6 +1,6 @@
 # EXPERIMENTO ATLAS - Reconstrução de sinal - Método de Desconvolução de Sinal Versão Threshold Caso P = N - Estimação da amplitude.
 # Autor: Guilherme Barroso Morett.
-# Data: 29 de jlnho de 2024.
+# Data: 29 de julho de 2024.
 
 # Objetivo do código: gráfico dos dados estatísticos ao longo das ocupações de acordo com o janelamento para o método de Desconvolução de Sinal Versão Threshold.
 
@@ -31,7 +31,7 @@ import os
 from termcolor import colored
 
 # Impressão de uma linha que representa o início do programa.
-print("\n---------------------------------------------------------------------------------------------------------------------------------------\n")
+print("\n-------------------------------------------------------------------------------------------------------------------------------------\n")
 
 # Título do programa.
 
@@ -41,7 +41,7 @@ titulo_programa = colored("Plote do gráfico do dado estatístico do erro de est
 # Impressão do título do programa.
 print(titulo_programa)
 
-### ------- 1) FUNÇÃO PARA A LEITURA DOS DADOS ESTATÍSTICOS DE TODAS AS OCUPAÇÕES PARA UM DETERMINADO JANELAMENTO PELO MÉTODO DESCONVOLUÇÃO DE SINAL THRESHOLD --------------- ###
+### --- 1) FUNÇÃO PARA A LEITURA DOS DADOS ESTATÍSTICOS DE TODAS AS OCUPAÇÕES PARA UM DETERMINADO JANELAMENTO PELO MÉTODO DESCONVOLUÇÃO DE SINAL THRESHOLD --- ###
 
 # Definição da função para a leitura dos dados estatísticos de todas as ocupações para um determinado janelamento pelo método de Desconvolução de Sinal Versão Threshold.
 def leitura_dados_estatisticos_janelamento_amplitude_desconvolucao_threshold(n_janelamento):
@@ -76,11 +76,11 @@ def leitura_dados_estatisticos_janelamento_amplitude_desconvolucao_threshold(n_j
     # A função retorna a matriz Matriz_Dados_Estatisticos_Janelamento.
     return Matriz_Dados_Estatisticos_Janelamento
 
-### -------------------------------------------------------------------------------------------------------------------------------------------- ###
+### ------------------------------------------------------------------------------------------------------------------------------------------ ###
 
 ### --- 2) INSTRUÇÃO PARA O PLOTE DO GRÁFICO DOS DADOS ESTATÍSTICOS AO LONGO DAS OCUPAÇÕES PARA UM DETERMINADO JANELAMENTO PELO MÉTODO DESCONVOLUÇÃO DE SINAL THRESHOLD ------ ###
 
-# Definição da função para o plote do gráfico do dado estatístico ao longo das ocupações para um determinado janelamento pelo método de Desconvolução de Sinal Versão Threshold.
+# Definição da instrução para o plote do gráfico do dado estatístico ao longo das ocupações para um determinado janelamento pelo método de Desconvolução de Sinal Versão Threshold.
 def grafico_dado_estatistico_janelamento_amplitude_desconvolucao_threshold(dado_estatistico, Matriz_Dados_Estatisticos_Janelamento):
     
     # Definição da variável indice_coluna_ocupações que armazena o valor do índice da coluna das ocupações.
@@ -100,6 +100,8 @@ def grafico_dado_estatistico_janelamento_amplitude_desconvolucao_threshold(dado_
     
     # Comando para o nome do eixo das abscissas.
     plt.xlabel("Ocupação", fontsize = 18)
+    
+    # Definição do tamanho dos números presentes no eixo das abscissas.
     plt.xticks(fontsize = 16)
     
     # Caso a variável dado_estatatístico seja 1 (média).
@@ -129,7 +131,7 @@ def grafico_dado_estatistico_janelamento_amplitude_desconvolucao_threshold(dado_
         # Comando para o nome do eixo das ordenadas.
         plt.ylabel("DP. do erro de estimação da amplitude (ADC Count)", fontsize = 18)
         
-    # Comando que define o tamanho dos números do eixo das ordenadas.
+    # Definição do tamanho dos números do eixo das ordenadas.
     plt.yticks(fontsize = 16)
     
     # Comando para o plote do gráfico.
@@ -141,11 +143,11 @@ def grafico_dado_estatistico_janelamento_amplitude_desconvolucao_threshold(dado_
     # Comando para o plote.
     plt.show()
         
-### -------------------------------------------------------------------------------------------------------------------------------------------- ###        
+### ------------------------------------------------------------------------------------------------------------------------------------------ ###        
         
-### -------------------------------------------------- 3) INSTRUÇÃO PRINCIPAL DO CÓDIGO (MAIN) ------------------------------------------------- ###
+### -------------------------------------------------- 3) INSTRUÇÃO PRINCIPAL DO CÓDIGO ------------------------------------------------------ ###
 
-# Definição da instrução principal (main) para esse código.
+# Definição da instrução principal do código.
 def principal_grafico_dado_estatistico_janelamento_desconvolucao_threshold():
     
     # Impressão de mensagem no terminal.
@@ -162,7 +164,7 @@ def principal_grafico_dado_estatistico_janelamento_desconvolucao_threshold():
     
         # Exibição de uma mensagem de alerta de que a opcao solicitada é inválida.
         print("Essa opção é inválida!")
-        print("---------------------------------------------------------------------------------------------------------------------------------------")
+        print("---------------------------------------------------------------------------------------------------------------------------------")
         # A execução do programa é interrompida.
         exit(1)
     
@@ -177,7 +179,7 @@ def principal_grafico_dado_estatistico_janelamento_desconvolucao_threshold():
     
         # Exibição de uma mensagem de alerta de que a quantidade de janelamento solicitada é inválida.
         print("Quantidade de janelamento inválida! Opções de janelamento: 7, 9, 11, 13, 15, 17, 19.")
-        print("---------------------------------------------------------------------------------------------------------------------------------------")
+        print("---------------------------------------------------------------------------------------------------------------------------------")
         # A execução do programa é interrompida.
         exit(1)
         
@@ -186,14 +188,14 @@ def principal_grafico_dado_estatistico_janelamento_desconvolucao_threshold():
     Matriz_Dados_Estatisticos_Janelamento = leitura_dados_estatisticos_janelamento_amplitude_desconvolucao_threshold(n_janelamento)
     
     grafico_dado_estatistico_janelamento_amplitude_desconvolucao_threshold(dado_estatistico, Matriz_Dados_Estatisticos_Janelamento)
-
-### -------------------------------------------------------------------------------------------------------------------------------------------- ###
     
 # Chamada da instrução principal do código.
 principal_grafico_dado_estatistico_janelamento_desconvolucao_threshold()
 
+### ------------------------------------------------------------------------------------------------------------------------------------------ ###
+
 # Impressão de uma linha que representa o fim do programa.
-print("\n---------------------------------------------------------------------------------------------------------------------------------------\n")
+print("\n-------------------------------------------------------------------------------------------------------------------------------------\n")
     
     
             
